@@ -10,3 +10,5 @@ https://www.figma.com/community/file/1244651198554404248/cardam-50-pixel-perfect
 https://www.figma.com/community/file/979352497651444515
 https://www.figma.com/community/file/1136322610998821318
 
+3. Jira 
+https://agnishwarraychaudhuri.atlassian.net/jira/software/projects/MICS/boards/34/timeline
