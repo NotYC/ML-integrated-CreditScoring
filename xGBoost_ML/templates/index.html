@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Scoring</title>
+</head>
+<body>
+    <h2>Enter User Details</h2>
+    <form method="post">
+        {% for field in [
+            'Age', 'Income', 'Employment_Status', 'Education_Level', 'Marital_Status',
+            'Number_of_Dependents', 'Credit_Utilization_Ratio', 'Missed_Payments_90days',
+            'Total_Credit_Accounts', 'Debt_to_Income_Ratio', 'Length_of_Credit_History',
+            'Bankruptcies'] %}
+            <label>{{ field.replace('_', ' ') }}</label><br>
+            <input type="text" name="{{ field }}"><br><br>
+        {% endfor %}
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if score %}
+    <h3>Predicted Credit Score: {{ score }}</h3>
+    {% endif %}
+    {% if not score %}
+    <h4>The data given does not enact real-world scenarios.</h4>
+    {% endif %}
+</body>
+</html>
