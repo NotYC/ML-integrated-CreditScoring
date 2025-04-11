@@ -4,8 +4,9 @@ import './LinkBank.css'
 
 
 const banks = [
-  { name: 'SBI', logo: '/assets/sbi.png' },
-  { name: 'HDFC', logo: '/assets/hdfc.png' },
+  { name: 'SBI', logo: 
+<img src="/assets/sbi.png" alt="SBI" /> },
+  { name: 'HDFC', logo: '/assets/hdfc.jpg' },
   { name: 'PNB', logo: '/assets/pnb.png' },
   { name: 'ICICI', logo: '/assets/icici.png' },
   { name: 'Canara', logo: '/assets/canara.png' },
