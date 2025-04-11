@@ -1,0 +1,68 @@
+import React, { useEffect, useRef, useState } from 'react'
+import './LinkBank.css'
+
+
+
+const banks = [
+  { name: 'SBI', logo: '/assets/sbi.png' },
+  { name: 'HDFC', logo: '/assets/hdfc.png' },
+  { name: 'PNB', logo: '/assets/pnb.png' },
+  { name: 'ICICI', logo: '/assets/icici.png' },
+  { name: 'Canara', logo: '/assets/canara.png' },
+  { name: 'Agni', logo: '/assets/agni.png' }
+]
+
+const LinkBank = () => {
+  const [showModal, setShowModal] = useState(false)
+  const modalRef = useRef()
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setShowModal(false)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  // Close modal when clicking outside the modal box
+  const handleClickOutside = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      setShowModal(false)
+    }
+  }
+
+  return (
+    <div className="linkbank-wrapper">
+      <div className="left-section">
+        <h1>Link Account</h1>
+        <p>Link your account to get started</p>
+        <button onClick={() => setShowModal(true)}>Connect Bank</button>
+      </div>
+
+      <div className="right-section">
+        <img src="/assets/image.png" alt="Visual" />
+      </div>
+
+      {showModal && (
+        <div className="modal-backdrop" onClick={handleClickOutside}>
+          <div className="modal-box" ref={modalRef}>
+            <b><h2>Select your Bank</h2></b>
+            <div className="bank-list">
+              {banks.map((bank, index) => (
+                <div key={index} className="bank-card">
+                  <img src={bank.logo} alt={bank.name} />
+                  <span>{bank.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default LinkBank
