@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Credit Score Form</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h2>Credit Score Predictor</h2>
+  <form id="creditForm">
+    <input name="age" placeholder="Age" required />
+    <input name="marital_status" placeholder="Marital Status" required />
+    <input name="profession" placeholder="Profession" required />
+    <input name="education" placeholder="Education Level" required />
+    <input name="income" placeholder="Income" required />
+    <input name="dependents" placeholder="Number of Dependents" required />
+    <input name="credit_util" placeholder="Credit Utilization Ratio" required />
+    <input name="missed_payments" placeholder="Missed Payments (90 days)" required />
+    <input name="total_accounts" placeholder="Total Credit Accounts" required />
+    <input name="dti" placeholder="Debt to Income Ratio" required />
+    <input name="credit_history" placeholder="Length of Credit History" required />
+    <input name="bankruptcies" placeholder="Bankruptcies" required />
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("creditForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const payload = {};
+      formData.forEach((value, key) => {
+        payload[key] = value;
+      });
+
+      try {
+        const res = await fetch("/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await res.json();
+        if (result.score && result.rating) {
+          // redirect to result.html with query params
+          const query = `?score=${result.score}&rating=${result.rating}`;
+          window.location.href = "/result.html" + query;
+        } else {
+          alert("Error: " + (result.message || "Unknown error"));
+        }
+      } catch (err) {
+        alert("Failed: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

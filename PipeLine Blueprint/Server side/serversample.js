@@ -1,57 +1,41 @@
 const express = require("express");
+const path = require("path");
 const bodyParser = require("body-parser");
 const axios = require("axios");
-const mongoose = require("mongoose");
-
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+const PORT = 3000;
+
+// Replace this with your actual model server (Flask) IP and port
+const MODEL_SERVER_URL = "http://<MODEL_PC_IP>:5000/predict"; // e.g., http://192.168.1.10:5000/predict
+
+// Middleware
 app.use(bodyParser.json());
-app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public"))); // for HTML, CSS, etc.
 
-// MongoDB
-mongoose.connect("mongodb://localhost:27017/creditApp", { useNewUrlParser: true });
-const Submission = mongoose.model("Submission", new mongoose.Schema({}, { strict: false }));
-
-// Route to show form
+// Serve form.html as default
 app.get("/", (req, res) => {
-  res.render("form"); // create form.ejs
+  res.sendFile(path.join(__dirname, "public", "form.html"));
 });
 
-// Handle form submission
+// Endpoint to handle form data and get prediction from Flask server
 app.post("/submit", async (req, res) => {
-  const formData = {
-    Age: parseFloat(req.body.age),
-    Marital_Status: req.body.marital_status,
-    Employment_Status: req.body.profession,
-    Education_Level: req.body.education,
-    Income: parseFloat(req.body.income),
-    Number_of_Dependents: parseInt(req.body.dependents),
-    Credit_Utilization_Ratio: parseFloat(req.body.credit_util),
-    Missed_Payments_90days: parseInt(req.body.missed_payments),
-    Total_Credit_Accounts: parseInt(req.body.total_accounts),
-    Debt_to_Income_Ratio: parseFloat(req.body.dti),
-    Length_of_Credit_History: parseFloat(req.body.credit_history),
-    Bankruptcies: parseInt(req.body.bankruptcies)
-  };
-
   try {
-    const response = await axios.post("http://<PC_A_IP>:5001/predict", formData);
-    const score = response.data.score;
+    const userData = req.body;
 
-    const rating = score >= 800 ? "Exceptional" :
-                   score >= 740 ? "Very Good" :
-                   score >= 670 ? "Good" :
-                   score >= 580 ? "Fair" : "Poor";
+    // Send data to the Flask model server
+    const response = await axios.post(MODEL_SERVER_URL, userData);
 
-    // Save to MongoDB
-    await Submission.create({ ...formData, score, rating, timestamp: new Date() });
+    // Assuming response from Flask contains { score: 745, rating: "Very Good" }
+    const { score, rating } = response.data;
 
-    res.render("result", { score, rating });
-
+    res.json({ score, rating });
   } catch (err) {
-    console.error("Prediction error:", err.message);
-    res.send("An error occurred: " + err.message);
+    console.error("Error contacting model server:", err.message);
+    res.status(500).json({ message: "Failed to fetch prediction from model server" });
   }
 });
 
-app.listen(3000, () => console.log("Express app running on port 3000"));
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Frontend server is running at http://localhost:${PORT}`);
+});
