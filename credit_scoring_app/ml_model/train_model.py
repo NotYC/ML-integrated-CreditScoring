@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
 # Load sample data (You need actual financial dataset)
-data = pd.read_csv("ml_model/credit_data.csv")
+data = pd.read_csv("credit_data.csv")
 
 
 # Features and target variable
