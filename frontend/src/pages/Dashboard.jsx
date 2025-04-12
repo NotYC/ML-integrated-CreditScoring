@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
@@ -12,6 +13,7 @@ const Dashboard = () => {
             <button className="w-full text-left px-4 py-2 rounded hover:bg-gray-100">Transaction History</button>
             <button className="w-full text-left px-4 py-2 rounded hover:bg-gray-100">About Us</button>
             <button className="w-full text-left px-4 py-2 rounded hover:bg-gray-100">Contact Us</button>
+            <Link to="/help"> <button className="w-full text-left px-4 py-2 rounded hover:bg-gray-100 text-black">Help</button> </Link>
           </nav>
         </div>
         {/* Credit Card Preview & User Info */}
@@ -104,6 +106,9 @@ const Dashboard = () => {
             <button className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded">Reset</button>
             <button className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded">Generate</button>
           </div>
+
+          
+
         </div>
       </main>
     </div>
