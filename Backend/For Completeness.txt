@@ -27,3 +27,25 @@ const handleSubmit = async (e) => {
     alert(err.message);
   }
 };
+
+##########
+Replace the handleSubmit in your frontend with this:
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Signup failed');
+
+    console.log('Signup Success:', data);
+    // Optional: localStorage.setItem("token", data.token);
+    // Navigate to dashboard or login
+  } catch (err) {
+    alert(err.message);
+  }
+};
