@@ -1,4 +1,9 @@
+// src/pages/Help.jsx
+
 import React from 'react'
+import credit1 from '../assets/credit1.png'
+import credit2 from '../assets/credit2.png'
+import credit3 from '../assets/credit3.png'
 
 const Help = () => {
   return (
@@ -42,9 +47,9 @@ const Help = () => {
         
         <h2 className="text-xl font-bold mb-4">Visuals & Examples</h2>
         <div className="flex flex-wrap gap-4 justify-center">
-          <img src="../assets/credit1.png" alt="Credit 1" className="w-80 h-48 object- rounded shadow" />
-          <img src="./assets/credit2.png" alt="Credit 2" className="w-80 h-48 object-cover rounded shadow" />
-          <img src="./assets/credit3.png" alt="Credit 3" className="w-80 h-48 object-cover rounded shadow" />
+          <img src={credit1} alt="Credit 1" className="w-80 h-48 object-cover rounded shadow" />
+          <img src={credit2} alt="Credit 2" className="w-80 h-48 object-cover rounded shadow" />
+          <img src={credit3} alt="Credit 3" className="w-80 h-48 object-cover rounded shadow" />
         </div>
 
       </div>
