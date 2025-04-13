@@ -157,11 +157,7 @@ const AboutUs = () => {
         
         <div className="bg-white shadow-md rounded-lg p-5">
           <p className="text-gray-700 mb-4">
-          The Automating Credit Scoring System is designed to be a fully automated, ML-driven credit assessment tool that will evaluate individuals based on financial transactions, income patterns, and other relevant factors.
-          
-          The system will Collect and preprocess structured/unstructured data (e.g., credit history, income, employment, and alternative data sources).
-          The system will Train, validate, and deploy ML models (e.g., Random Forest, Gradient Boosting, or Neural Networks) to predict creditworthiness.
-          Provide interpretable results (Credit Score) to comply with regulatory standards and user trust.
+          The Automating Credit Scoring System is an intelligent, end-to-end solution that leverages machine learning to evaluate an individual’s creditworthiness based on financial transactions, income patterns, employment history, and alternative data sources. It automates the entire pipeline—from data collection and preprocessing to model training, validation, and deployment—ensuring accurate and efficient credit assessments. Designed with transparency in mind, the system delivers interpretable credit scores that not only foster user trust but also align with regulatory compliance standards, making it a reliable and future-ready tool for modern financial ecosystems.
 
           </p>
           
