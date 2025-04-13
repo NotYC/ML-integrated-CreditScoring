@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import dashboard from '../assets/dashboard.png'
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ function SignIn() {
   };
 
   return (
-    <div className="min-h-screen flex bg-white">
+    <div className="min-h-screen h-screen flex bg-white overflow-hidden">
       {/* Left side: Sign In Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-8">
         <div className="w-full max-w-md">
@@ -69,12 +70,13 @@ function SignIn() {
       </div>
 
       {/* Right side: Optional design/image */}
-      <div className="hidden md:block md:w-1/2 bg-[#f9fafb]">
-        {/* You can replace this with an <img src="..." /> or any JSX to reflect your design */}
-        <div className="h-full flex items-center justify-center p-10">
-          <img src="/your-dashboard-image.png" alt="Dashboard preview" className="max-w-full h-auto" />
+      <div className="hidden md:block md:w-1/2 h-screen">
+        <div className="h-full w-full border-t-2 border-b-2 border-l-2 border-black">
+          <img src={dashboard} alt="Dashboard preview" className="w-full h-full object-cover"/>
         </div>
       </div>
+
+
     </div>
   );
 }

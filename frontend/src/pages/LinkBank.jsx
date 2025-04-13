@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './LinkBank.css'
+import dashboard from '../assets/dashboard.png';
 
 
 
@@ -43,8 +44,10 @@ const LinkBank = () => {
         <button onClick={() => setShowModal(true)}>Connect Bank</button>
       </div>
 
-      <div className="right-section">
-        <img src="/assets/image.png" alt="Visual" />
+      <div className="hidden md:block md:w-1/2 h-screen">
+        <div className="h-full w-full border-t-2 border-b-2 border-l-2 border-black">
+          <img src={dashboard} alt="Dashboard preview" className="w-full h-full object-cover"/>
+        </div>
       </div>
 
       {showModal && (
