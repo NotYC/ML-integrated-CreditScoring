@@ -115,14 +115,14 @@
 // );
 
 // export default Sidebar;
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo-removebg-preview.png'; // adjust based on actual location
 
 const Sidebar = () => {
   const location = useLocation();
+
   const isActive = (path) => {
-    // If we're at the root path or the path is /Home, consider Home active
     if (path === "/Home") {
       return location.pathname === "/Home" || location.pathname === "/";
     }
@@ -131,28 +131,38 @@ const Sidebar = () => {
 
   return (
     <aside className="w-[320px] h-screen fixed top-0 left-0 bg-white shadow-lg p-6 z-10 overflow-hidden flex flex-col justify-between">
-      {/* Navigation */}
-      <div className="flex flex-col space-y-2 mt-40">
-        <Link to="/Home" className="w-full">
-          <SidebarButton text="Home" active={isActive("/Home")} />
-        </Link>
-        <Link to="/my-banks" className="w-full">
-          <SidebarButton text="My Banks" active={isActive("/my-banks")} />
-        </Link>
-        <Link to="/transaction-history" className="w-full">
-          <SidebarButton text="Transaction History" active={isActive("/transaction-history")} />
-        </Link>
-        <Link to="/about-us" className="w-full">
-          <SidebarButton text="About Us" active={isActive("/about-us")} />
-        </Link>
-        {/* <Link to="/contact-us" className="w-full">
-          <SidebarButton text="Contact Us" active={isActive("/contact-us")} />
-        </Link> */}
-        <Link to="/help" className="w-full">
-          <SidebarButton text="Help" active={isActive("/help")} />
-        </Link>
+      {/* Logo + Navigation */}
+      <div>
+        {/* Logo */}
+        <div className="flex justify-center mb-10">
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-24 w-auto object-contain transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+
+        {/* Navigation */}
+        <div className="flex flex-col space-y-2">
+          <Link to="/Home" className="w-full">
+            <SidebarButton text="Home" active={isActive("/Home")} />
+          </Link>
+          <Link to="/my-banks" className="w-full">
+            <SidebarButton text="My Banks" active={isActive("/my-banks")} />
+          </Link>
+          <Link to="/transaction-history" className="w-full">
+            <SidebarButton text="Transaction History" active={isActive("/transaction-history")} />
+          </Link>
+          <Link to="/about-us" className="w-full">
+            <SidebarButton text="About Us" active={isActive("/about-us")} />
+          </Link>
+          <Link to="/help" className="w-full">
+            <SidebarButton text="Help" active={isActive("/help")} />
+          </Link>
+        </div>
       </div>
-      {/* Credit Card Preview + User Info */}
+
+      {/* Credit Card + User Info */}
       <div className="space-y-6 mb-8">
         <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="text-sm mb-4 font-medium">YOUR BANK</div>
@@ -176,15 +186,14 @@ const Sidebar = () => {
 };
 
 const SidebarButton = ({ text, active }) => (
-  <div className={`w-full px-4 py-3 rounded-md font-medium transition-all duration-200 transform hover:scale-[1.03] ${
-    active
-      ? 'bg-blue-500 text-white'
-      : 'text-black hover:text-blue-600'
-  }`}>
+  <div
+    className={`w-full px-4 py-3 rounded-md font-medium transition-all duration-200 transform hover:scale-[1.03] ${
+      active ? 'bg-blue-500 text-white' : 'text-black hover:text-blue-600'
+    }`}
+  >
     {text}
   </div>
 );
 
 export default Sidebar;
-
 
