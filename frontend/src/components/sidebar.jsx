@@ -10,7 +10,7 @@ const Sidebar = () => {
         <SidebarButton text="My Banks" />
         <SidebarButton text="Transaction History" />
         <SidebarButton text="About Us" />
-        <SidebarButton text="Contact Us" />
+        {/* <SidebarButton text="Contact Us" /> */}
         <Link to="/help"><SidebarButton text="Help" /></Link>
       </div>
 
