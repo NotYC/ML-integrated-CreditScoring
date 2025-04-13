@@ -1,5 +1,9 @@
 export async function sendDataToBackend(formData) {
-  const { name, work_experience, ...payload } = formData; // remove dummy fields
+  // Prepare the payload by removing dummy fields (if necessary)
+  const { name, work_experience, ...payload } = formData; // Adjust as needed for your form data
+
+  // Print the data received in the console
+  console.log('Data sent to flask:', payload);
 
   try {
     const res = await fetch('http://localhost:5000/predict', {
@@ -8,7 +12,10 @@ export async function sendDataToBackend(formData) {
       body: JSON.stringify(payload)
     });
 
+    // Print the response data
     const result = await res.json();
+    console.log('Response from backend:', result);
+
     return result;
   } catch (err) {
     console.error('Error calling backend:', err);

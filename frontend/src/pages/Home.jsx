@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import { sendDataToBackend } from "../../../Backend_STR/apiClient";
+import { sendDataToBackend } from "..\\..\\..\\Backend_STR\\config\\model2server.js";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ const Home = () => {
     marital_status: '',
     profession: '',
     education: '',
-    work_experience: '', // dummy
+    work_experience: '',
     income: '',
     dependents: '',
     credit_util: '',
@@ -19,20 +19,23 @@ const Home = () => {
     bankruptcies: ''
   });
 
-  const [score, setScore] = useState(null);
-  const [rating, setRating] = useState('');
+  const [score, setScore] = useState(350); // default score
+  const [rating, setRating] = useState('Poor'); // default rating
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleGenerate = async () => {
-  const result = await sendDataToBackend(formData);
-  if (result?.score) {
-    setScore(result.score);
-    setRating(result.rating);
-  }
-};
+    const { name, work_experience, ...payload } = formData; // exclude dummy fields
+    console.log("🔁 Sending to backend:", payload);
+
+    const result = await sendDataToBackend(payload);
+    if (result?.score) {
+      setScore(result.score);
+      setRating(result.rating);
+    }
+  };
 
   return (
     <main className="flex-1 p-8 space-y-8 bg-white text-black">
@@ -71,20 +74,65 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Score Display */}
-      {score && (
-        <div className="flex flex-col items-center bg-white p-6 rounded shadow text-black">
+      {/* Credit Score Section - Always visible */}
+      <div className="flex flex-col md:flex-row gap-6 items-center">
+        {/* Score Display */}
+        <div className="flex-1 flex flex-col items-center bg-white p-6 rounded shadow text-black">
           <div className="text-6xl font-bold">{score}</div>
-          <div className="text-xl mt-2 font-semibold">Rating: {rating}</div>
+          <div className={`text-xl mt-2 font-semibold ${
+            rating === "Exceptional" ? "text-green-700" :
+            rating === "Very Good"   ? "text-green-600" :
+            rating === "Good"        ? "text-green-500" :
+            rating === "Fair"        ? "text-yellow-500" :
+                                       "text-red-500"
+          }`}>
+            Rating: {rating}
+          </div>
+          <div className="w-full h-4 mt-4 bg-gradient-to-r from-red-500 via-yellow-400 to-green-500 rounded-full relative">
+            <div
+              className="absolute top-0 w-1 h-4 bg-black"
+              style={{ left: `${((score - 300) / 550) * 100}%` }}
+            ></div>
+          </div>
+          <div className="flex justify-between text-sm w-full mt-2 px-1">
+            <span>300</span>
+            <span>850</span>
+          </div>
         </div>
-      )}
+
+        {/* Score Info */}
+        <div className="flex-1 bg-white p-6 rounded shadow text-sm text-black">
+          <h3 className="font-bold mb-2">Understand your credit score</h3>
+          <ul className="space-y-1">
+            <li><span className="text-green-700 font-semibold">Exceptional:</span> 800–850</li>
+            <li><span className="text-green-600 font-semibold">Very Good:</span> 740–799</li>
+            <li><span className="text-green-500 font-semibold">Good:</span> 670–739</li>
+            <li><span className="text-yellow-500 font-semibold">Fair:</span> 580–669</li>
+            <li><span className="text-red-500 font-semibold">Poor:</span> 300–579</li>
+          </ul>
+        </div>
+      </div>
 
       {/* Buttons */}
-      <div className="flex gap-4">
-        <button className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded text-black" onClick={() => setFormData({ name: '', age: '', marital_status: '', profession: '', education: '', work_experience: '', income: '', dependents: '', credit_util: '', missed_payments: '', total_accounts: '', dti: '', credit_history: '', bankruptcies: '' })}>
+      <div className="flex flex-col gap-4 mt-6 md:flex-row">
+        <button
+          className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded text-black"
+          onClick={() => {
+            setFormData({
+              name: '', age: '', marital_status: '', profession: '', education: '', work_experience: '',
+              income: '', dependents: '', credit_util: '', missed_payments: '',
+              total_accounts: '', dti: '', credit_history: '', bankruptcies: ''
+            });
+            setScore(350); // reset to default
+            setRating('Poor'); // reset to default
+          }}
+        >
           Reset
         </button>
-        <button className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded" onClick={handleGenerate}>
+        <button
+          className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded"
+          onClick={handleGenerate}
+        >
           Generate
         </button>
       </div>
