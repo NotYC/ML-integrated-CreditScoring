@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//import { sendDataToBackend } from "../../../Backend_STR/apiClient";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -26,24 +27,12 @@ const Home = () => {
   };
 
   const handleGenerate = async () => {
-    const { name, work_experience, ...payload } = formData; // omit dummy fields
-
-    try {
-      const res = await fetch('http://localhost:5000/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const result = await res.json();
-      if (result.score) {
-        setScore(result.score);
-        setRating(result.rating);
-      }
-    } catch (err) {
-      console.error('Error:', err);
-    }
-  };
+  const result = await sendDataToBackend(formData);
+  if (result?.score) {
+    setScore(result.score);
+    setRating(result.rating);
+  }
+};
 
   return (
     <main className="flex-1 p-8 space-y-8 bg-white text-black">
