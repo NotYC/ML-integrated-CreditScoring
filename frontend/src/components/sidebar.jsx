@@ -134,11 +134,11 @@ const Sidebar = () => {
       {/* Logo + Navigation */}
       <div>
         {/* Logo */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mb-6">
           <img
             src={logo}
             alt="Logo"
-            className="h-24 w-auto object-contain transition-transform duration-300 hover:scale-105"
+            className="h-28 w-auto object-contain transition-transform duration-300 hover:scale-105"
           />
         </div>
 
@@ -196,4 +196,3 @@ const SidebarButton = ({ text, active }) => (
 );
 
 export default Sidebar;
-
