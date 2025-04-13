@@ -88,7 +88,7 @@ const Home = () => {
           <input type="text" placeholder="Enter your state" className="w-full p-2 border rounded text-black" />
           <input type="text" placeholder="Enter ownership status" className="w-full p-2 border rounded text-black" />
           <input type="text" placeholder="Enter residence years" className="w-full p-2 border rounded text-black" />
-          <input type="text" placeholder="Enter ownership status" className="w-full p-2 border rounded text-black" />
+          <input type="text" placeholder="Enter Bankruptcies" className="w-full p-2 border rounded text-black" />
         </div>
       </div>
 
