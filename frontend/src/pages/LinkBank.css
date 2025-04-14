@@ -115,4 +115,130 @@
     font-size: 0.9rem;
     color: black;
   }
+
+
+
+
+  /* selectbank */
+
+  .form-modal {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .bank-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  
+  .bank-form input,
+  .bank-form select {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .consent-label {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .submit-button {
+    margin-top: 1rem;
+    padding: 10px 24px;
+    background-color: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #004dcc;
+  }
+  
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.4);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto; /* ✅ enable scroll */
+    padding: 2rem 1rem;
+  }
+  
+  .modal-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    width: 95%;
+    max-width: 800px; /* ✅ increased width */
+    color: black;
+    max-height: 90vh; /* limit height */
+    overflow-y: auto; /* ✅ scroll inside */
+  }
+  
+  .modal-box h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    color: black;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* ✅ 2-column layout */
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .form-grid input,
+  .form-grid select,
+  .form-grid label {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: white;
+  }
+  
+  .form-grid label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+  
+  .consent-box {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .submit-btn {
+    grid-column: span 2;
+    background-color: #0066ff;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
   

@@ -38,7 +38,10 @@ const Home = () => {
   };
 
   return (
-    <main className="flex-1 p-8 space-y-8 bg-white text-black">
+    <main className="flex-1 p-8 space-y-8 bg-gray-100 text-black">
+      
+      <h1>Welcome xxx!</h1>
+      fill the details to get your credit score!<br></br>
       {/* Personal Info */}
       <div className="bg-white rounded shadow p-6">
         <h2 className="font-bold text-lg mb-4">Personal Info</h2>

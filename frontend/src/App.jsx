@@ -43,7 +43,8 @@ import LinkBank from './pages/LinkBank'
 import Help from "./pages/Help"
 import MainLayout from './layout/MainLayout'
 import Home from "./pages/Home"
-import AboutUs from "./pages/AboutUs"  // Import the new AboutUs component
+import AboutUs from "./pages/AboutUs" 
+
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/linkbank" element={<LinkBank />} />
+      
       
       {/* Routes for sidebar such that it remains constant */}
       <Route element={<MainLayout />}>    
