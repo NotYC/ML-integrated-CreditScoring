@@ -1,0 +1,8 @@
+We need to disable firewall to ensure communication!
+
+Steps to follow
+Then try pinging again. If it works, firewall is blocking ICMP (ping requests). You can later re-enable the firewall and allow ping:
+
+Open Windows Defender Firewall > Advanced settings
+
+Inbound Rules → Enable File and Printer Sharing (Echo Request - ICMPv4-In)
