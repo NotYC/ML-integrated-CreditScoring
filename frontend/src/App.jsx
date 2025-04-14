@@ -42,6 +42,7 @@ import Dashboard from './pages/Dashboard'
 import LinkBank from './pages/LinkBank'
 import Help from "./pages/Help"
 import MainLayout from './layout/MainLayout'
+import TransactionHistory from './pages/TransactionHistory'
 import Home from "./pages/Home"
 import AboutUs from "./pages/AboutUs" 
 
@@ -61,8 +62,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />  {/* Added AboutUs route */}
         <Route path="/my-banks" element={<Navigate to="/dashboard" replace />} />  {/* Redirect to dashboard for now */}
-        <Route path="/transaction-history" element={<Navigate to="/dashboard" replace />} />  {/* Redirect to dashboard for now */}
-        
+        {/* Added the Transaction History route */}
+        <Route path="/transaction-history" element={<TransactionHistory />} />        
         {/* Redirect /dashboard to /home if you want Home as the default */}
         <Route path="/" element={<Navigate to="/home" replace />} />
       </Route>
