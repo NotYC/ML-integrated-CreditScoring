@@ -16,3 +16,5 @@ https://agnishwarraychaudhuri.atlassian.net/jira/software/projects/MICS/boards/3
 
 3 EPICS HAVE BEEN COMPLETED!!! 
 ONTO THE 4TH SPRINT
+
+Remote Mechanism for mongoDB added. Prepped for Docker Image preperation.
