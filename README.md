@@ -31,7 +31,7 @@ This project is a **Machine Learning Integrated Credit Scoring System** that pre
 ## Prerequisites
 
 - Node.js
-- MongoDB (Local or Cloud instance)
+- MongoDB Compass
 - Python 3.x
 - Pip (for Python dependencies)
 - NPM  for managing JavaScript dependencies
