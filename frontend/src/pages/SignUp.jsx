@@ -136,6 +136,7 @@ import { Link } from 'react-router-dom';
 import dashboard from '../assets/dashboard.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { sendSignupData } from "../../../Backend_STR/Authentication/sendSignupData.js";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -159,10 +160,30 @@ function SignUp() {
     setFormData({ ...formData, dob: date });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Sign up data:', formData);
+
+
+  const handleSignup = async () => {
+    const { password, ...rest } = formData;
+    const payload = { ...rest, password };
+
+    console.log("Sending signup payload:", payload);
+
+    const result = await sendSignupData(payload);
+
+    if (result?.message === 'User created') {
+      alert('Signup successful!');
+    } else {
+      alert('Signup failed!');
+      console.error(result.error || result.message);
+    }
   };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log('Sign up data:', formData);
+  await handleSignup(); // call your signup function here
+};
+
 
   return (
     <div className="min-h-screen w-full flex">

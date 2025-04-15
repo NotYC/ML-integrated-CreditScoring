@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+// Backend_STR/models/User.js
+const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   address: String,
@@ -11,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   uid: String,
   email: { type: String, unique: true },
   password: String,
-  verified: { type: Boolean, default: false },
+  verified: { type: String, default: 'no' },
 });
 
-export default mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);
