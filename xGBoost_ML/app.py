@@ -8,9 +8,10 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load model and preprocessor
-model = joblib.load('model/stacked_model.pkl')
-preprocessor = joblib.load('model/preprocessor.pkl')
-
+#model = joblib.load('model/stacked_model.pkl')
+#preprocessor = joblib.load('model/preprocessor.pkl')
+model = joblib.load('model/polynomial_xgb_stacked_model.pkl')
+preprocessor = joblib.load('model/polynomial_preprocessor.pkl')
 # MongoDB setup
 client = MongoClient("mongodb://localhost:27017/")
 db = client["credit_score_db"]
