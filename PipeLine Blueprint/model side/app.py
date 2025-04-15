@@ -11,6 +11,7 @@ CORS(app)  # Enable CORS so Express can access it
 preprocessor = joblib.load("model/preprocessor.pkl")
 model = joblib.load("model/stacked_model.pkl")
 
+
 # Connect to MongoDB
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["credit_app"]
@@ -55,6 +56,8 @@ def predict():
             rating = "Good"
         elif score < 800:
             rating = "Very Good"
+        elif score < 300 or score > 850:
+            rating = "Invalid"
         else:
             rating = "Exceptional"
 
