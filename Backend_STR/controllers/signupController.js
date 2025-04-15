@@ -30,7 +30,7 @@ const signupHandler = async (req, res) => {
       },
     });
 
-    const verificationUrl = http://localhost:5000/verify?token=${token};
+    const verificationUrl = `http://localhost:5000/verify?token=${token}`;
 
     await transporter.sendMail({
       to: email,

@@ -1,17 +1,21 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
-import authRoutes from './routes/authRoutes.js';
-import cors from 'cors';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
 
-dotenv.config();
-connectDB();
+const signupHandler = require('./Backend_STR/controllers/signupController');
+const verifyRoute = require('./Backend_STR/routes/verifyRoute');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log("MongoDB connected"));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.post('/signup', signupHandler);
+app.use('/', verifyRoute);
+
+app.listen(5000, () => console.log("Server running on port 5000"));
