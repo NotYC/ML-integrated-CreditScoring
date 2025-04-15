@@ -134,6 +134,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import dashboard from '../assets/dashboard.png';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -143,7 +145,7 @@ function SignUp() {
     city: '',
     state: '',
     postalCode: '',
-    dob: '',
+    dob: null,
     uid: '',
     email: '',
     password: ''
@@ -151,6 +153,10 @@ function SignUp() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, dob: date });
   };
 
   const handleSubmit = (e) => {
@@ -166,25 +172,93 @@ function SignUp() {
           <h1 className="text-4xl font-bold mb-6">Sign Up</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex gap-4">
-              <input name="firstName" placeholder="Enter your first name" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
-              <input name="lastName" placeholder="Enter your last name" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
+              <input
+                name="firstName"
+                placeholder="Enter your first name"
+                onChange={handleChange}
+                required
+                className="flex-1 border border-gray-300 p-2 rounded"
+              />
+              <input
+                name="lastName"
+                placeholder="Enter your last name"
+                onChange={handleChange}
+                required
+                className="flex-1 border border-gray-300 p-2 rounded"
+              />
             </div>
 
-            <input name="address" placeholder="Enter your specific address" onChange={handleChange} required className="w-full border border-gray-300 p-2 rounded" />
-            <input name="city" placeholder="Enter your city" onChange={handleChange} required className="w-full border border-gray-300 p-2 rounded" />
+            <input
+              name="address"
+              placeholder="Enter your specific address"
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 p-2 rounded"
+            />
+            <input
+              name="city"
+              placeholder="Enter your city"
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 p-2 rounded"
+            />
 
             <div className="flex gap-4">
-              <input name="state" placeholder="State" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
-              <input name="postalCode" placeholder="Pin Code" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
+              <input
+                name="state"
+                placeholder="State"
+                onChange={handleChange}
+                required
+                className="flex-1 border border-gray-300 p-2 rounded"
+              />
+              <input
+                name="postalCode"
+                placeholder="Pin Code"
+                onChange={handleChange}
+                required
+                className="flex-1 border border-gray-300 p-2 rounded"
+              />
             </div>
 
             <div className="flex gap-4">
-              <input name="dob" type="date" placeholder="MM/DD/YYYY" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
-              <input name="uid" placeholder="Enter UID" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
+              <div className="flex-1">
+                <DatePicker
+                  selected={formData.dob}
+                  onChange={handleDateChange}
+                  dateFormat="yyyy-MM-dd"
+                  placeholderText="Select your date of birth"
+                  className="w-full border border-gray-300 p-2 rounded"
+                  showYearDropdown
+                  showMonthDropdown
+                  dropdownMode="select"
+                  maxDate={new Date()}
+                />
+              </div>
+              <input
+                name="uid"
+                placeholder="Enter UID"
+                onChange={handleChange}
+                required
+                className="flex-1 border border-gray-300 p-2 rounded"
+              />
             </div>
 
-            <input name="email" type="email" placeholder="Enter your email" onChange={handleChange} required className="w-full border border-gray-300 p-2 rounded" />
-            <input name="password" type="password" placeholder="Enter your password" onChange={handleChange} required className="w-full border border-gray-300 p-2 rounded" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 p-2 rounded"
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 p-2 rounded"
+            />
 
             <button
               type="submit"
@@ -206,7 +280,7 @@ function SignUp() {
       {/* Right side with image */}
       <div className="hidden md:block md:w-1/2 h-screen">
         <div className="h-full w-full border-t-2 border-b-2 border-l-2 border-black">
-          <img src={dashboard} alt="Dashboard preview" className="w-full h-full object-cover"/>
+          <img src={dashboard} alt="Dashboard preview" className="w-full h-full object-cover" />
         </div>
       </div>
     </div>
@@ -214,4 +288,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
