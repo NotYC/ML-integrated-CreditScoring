@@ -174,12 +174,12 @@ function SignUp() {
             <input name="city" placeholder="Enter your city" onChange={handleChange} required className="w-full border border-gray-300 p-2 rounded" />
 
             <div className="flex gap-4">
-              <input name="state" placeholder="Example: DL" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
-              <input name="postalCode" placeholder="Example: 110019" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
+              <input name="state" placeholder="State" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
+              <input name="postalCode" placeholder="Pin Code" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
             </div>
 
             <div className="flex gap-4">
-              <input name="dob" type="date" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
+              <input name="dob" type="date" placeholder="MM/DD/YYYY" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
               <input name="uid" placeholder="Enter UID" onChange={handleChange} required className="flex-1 border border-gray-300 p-2 rounded" />
             </div>
 
