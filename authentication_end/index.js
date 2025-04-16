@@ -26,11 +26,22 @@ app.post('/signup', async (req, res) => {
 });
 
 // Route to handle email verification
+// app.get('/verify', async (req, res) => {
+//   const email = req.query.email;
+//   try {
+//     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
+//     res.send("Email verified! You can now log in.");
+//   } catch (err) {
+//     res.status(400).send("Verification failed.");
+//   }
+// });
+
 app.get('/verify', async (req, res) => {
   const email = req.query.email;
   try {
     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
-    res.send("Email verified! You can now log in.");
+    // Auto redirect to SignIn page (adjust path if needed)
+    res.redirect('http://localhost:5173/signin');
   } catch (err) {
     res.status(400).send("Verification failed.");
   }
