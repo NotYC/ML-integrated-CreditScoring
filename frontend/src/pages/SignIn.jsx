@@ -1,14 +1,36 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import dashboard from '../assets/dashboard.png'
+import { Link, useNavigate } from 'react-router-dom';
+import dashboard from '../assets/dashboard.png';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // for redirection
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign in attempt with:', { email, password });
+    setError(null); // reset error
+
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        setError(data.message);
+      } else {
+        alert('Login successful!');
+        navigate('/dashboard'); // navigate to dashboard
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Something went wrong. Please try again later.');
+    }
   };
 
   return (
@@ -50,6 +72,12 @@ function SignIn() {
               />
             </div>
 
+            {error && (
+              <div className="mb-4 text-red-600 text-sm font-medium">
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 mt-4 mb-6"
@@ -72,13 +100,12 @@ function SignIn() {
       {/* Right side: Optional design/image */}
       <div className="hidden md:block md:w-1/2 h-screen">
         <div className="h-full w-full border-t-2 border-b-2 border-l-2 border-black">
-          <img src={dashboard} alt="Dashboard preview" className="w-full h-full object-cover"/>
+          <img src={dashboard} alt="Dashboard preview" className="w-full h-full object-cover" />
         </div>
       </div>
-
-
     </div>
   );
 }
 
 export default SignIn;
+// This code is a React component for a Sign In page. It includes a form for users to enter their email and password, and handles form submission to log the user in. If the login is successful, the user is redirected to the dashboard. The right side of the page displays an image related to the dashboard.
