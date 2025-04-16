@@ -5,15 +5,15 @@ async function sendVerification(email) {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: '####',
+      user: '#####',
       pass: process.env.GMAIL_PASSWORD // not your real email password
     }
   });
 
-  const verificationLink = `http://localhost:5000/verify?email=${encodeURIComponent(email)}`;
+  const verificationLink = `http://172.19.51.92:5000/verify?email=${encodeURIComponent(email)}`;
 
   await transporter.sendMail({
-    from: '"Your App" <####>',
+    from: '"Your App" <######>',
     to: email,
     subject: 'Please verify your email',
     html: `<h2>Verify your email</h2><p><a href="${verificationLink}">Click here to verify</a></p>`
