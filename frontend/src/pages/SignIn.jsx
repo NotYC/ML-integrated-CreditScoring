@@ -13,7 +13,7 @@ function SignIn() {
     setError(null); // reset error
 
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('http://172.19.51.92:5000/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -25,7 +25,7 @@ function SignIn() {
         setError(data.message);
       } else {
         alert('Login successful!');
-        navigate('/dashboard'); // navigate to dashboard
+        navigate('/home'); // navigate to dashboard
       }
     } catch (err) {
       console.error('Login error:', err);
