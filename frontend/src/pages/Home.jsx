@@ -231,6 +231,7 @@ const Home = () => {
               <li>• Keep credit utilization below 30%</li>
               <li>• Maintain a mix of credit types</li>
               <li>• Limit new credit applications</li>
+              <li>• Keep old credit accounts open </li>
             </ul>
           </div>
         </div>
