@@ -55,6 +55,7 @@ const Home = () => {
         <h2 className="font-bold text-lg mb-4">Personal Info</h2>
         <div className="space-y-4">
           <input
+            type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
