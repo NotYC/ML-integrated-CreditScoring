@@ -62,19 +62,24 @@ const Home = () => {
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
           <input
+            type = "number"
             name="age"
             value={formData.age}
             onChange={handleChange}
             placeholder="Enter your age"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
-          <input
+          <select
             name="marital_status"
             value={formData.marital_status}
             onChange={handleChange}
-            placeholder="Enter your marital status"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
-          />
+          >
+            <option value="">Select marital status</option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+          </select>
         </div>
       </div>
 
