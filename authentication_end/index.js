@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect MongoDB
-mongoose.connect('mongodb://localhost:27017/signupDB')
+mongoose.connect('mongodb://capstone:project@172.19.150.21:27017/signupDB', {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
