@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const loginUser = require('./loginUser');
 const registerUser = require('./registerUser');
 const User = require('./mongoFrame/userFrame.js');
 
@@ -33,6 +33,17 @@ app.get('/verify', async (req, res) => {
     res.send("Email verified! You can now log in.");
   } catch (err) {
     res.status(400).send("Verification failed.");
+  }
+});
+
+// Route to handle login
+app.post('/login', async (req, res) => {
+  try {
+    const result = await loginUser(req.body);
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error during login' });
   }
 });
 
