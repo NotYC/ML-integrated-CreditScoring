@@ -59,7 +59,7 @@ const Home = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Enter your name"
+            placeholder="Enter your Name"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
           <input
@@ -67,7 +67,7 @@ const Home = () => {
             name="age"
             value={formData.age}
             onChange={handleChange}
-            placeholder="Enter your age"
+            placeholder="Enter your Age"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -76,7 +76,7 @@ const Home = () => {
             onChange={handleChange}
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">Select marital status</option>
+            <option value="">Select Marital Status</option>
             <option value="Single">Single</option>
             <option value="Married">Married</option>
             <option value="Divorced">Divorced</option>
@@ -92,14 +92,14 @@ const Home = () => {
             name="profession"
             value={formData.profession}
             onChange={handleChange}
-            placeholder="Enter your profession"
+            placeholder="Enter your Profession"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
           <input
             name="education"
             value={formData.education}
             onChange={handleChange}
-            placeholder="Enter your education level"
+            placeholder="Enter your Education Level"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
           <select
@@ -108,7 +108,7 @@ const Home = () => {
               onChange={handleChange}
               className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
             >
-            <option value="">Select Employment status</option>
+            <option value="">Select Employment Status</option>
             <option value="Unemployed">Unemployed</option>
             <option value="Self-Employed">Self-Employed</option>
             <option value="Employed">Employed</option>
@@ -118,7 +118,7 @@ const Home = () => {
             name="work_experience"
             value={formData.work_experience}
             onChange={handleChange}
-            placeholder="Enter your work experience"
+            placeholder="Enter your Work Experience"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -129,13 +129,13 @@ const Home = () => {
         <h2 className="font-bold text-lg mb-4">Asset Info</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            { name: 'income', placeholder: 'Enter your income' },
-            { name: 'dependents', placeholder: 'Number of dependents' },
-            { name: 'credit_util', placeholder: 'Credit utilization ratio' },
-            { name: 'missed_payments', placeholder: 'Missed payments (90 days)' },
-            { name: 'total_accounts', placeholder: 'Total credit accounts' },
-            { name: 'dti', placeholder: 'Debt to income ratio' },
-            { name: 'credit_history', placeholder: 'Length of credit history' },
+            { name: 'income', placeholder: 'Enter your Income' },
+            { name: 'dependents', placeholder: 'Number of Dependents' },
+            { name: 'credit_util', placeholder: 'Credit Utilization Ratio' },
+            { name: 'missed_payments', placeholder: 'Missed Payments (90 days)' },
+            { name: 'total_accounts', placeholder: 'Total Credit Accounts' },
+            { name: 'dti', placeholder: 'Debt to Income Ratio' },
+            { name: 'credit_history', placeholder: 'Length of Credit History' },
             { name: 'bankruptcies', placeholder: 'Bankruptcies' },
           ].map((field) => (
             <input
