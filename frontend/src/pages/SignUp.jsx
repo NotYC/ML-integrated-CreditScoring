@@ -136,6 +136,7 @@ import { Link } from 'react-router-dom';
 import dashboard from '../assets/dashboard.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { sendDataToBackend } from '../../api/signup2backend.js';
 
 
 function SignUp() {
@@ -165,9 +166,24 @@ function SignUp() {
 
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log('Sign up data:', formData);
-};
+    e.preventDefault();
+
+  // Format the data (e.g., convert dob to string)
+    const payload = {
+      ...formData,
+      dob: formData.dob ? formData.dob.toISOString().split('T')[0] : null // format DOB as yyyy-mm-dd
+    };
+
+    console.log("📦 Sending signup data to backend:", payload);
+
+    const result = await sendDataToBackend(payload);
+
+    if (result.success) {
+      alert("✅ Signup successful! Please check your email to verify.");
+    } else {
+      alert("Signup failed: " + result.message);
+    }
+  };
 
 
   return (
