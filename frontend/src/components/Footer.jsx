@@ -26,7 +26,7 @@ const Footer = () => {
 
         {/* All Rights Reserved Text */}
         <div className="text-center text-sm italic">
-          <p>© {new Date().getFullYear()},  Know your credit score. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()},  Know Your Credit Score. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
