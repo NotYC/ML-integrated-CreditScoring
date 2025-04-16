@@ -7,3 +7,21 @@ async function loginUser(data) {
 
   const user = await User.findOne({ email });
 
+  if (!user) {
+    return { success: false, message: "Invalid email" };
+  }
+
+  if (user.isVerified !== "YES") {
+    return { success: false, message: "Please verify your email first." };
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+
+  if (!passwordMatch) {
+    return { success: false, message: "Incorrect password" };
+  }
+
+  return { success: true, message: "Login successful", userId: user._id, username: user.username };
+}
+
+module.exports = loginUser;
