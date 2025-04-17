@@ -6,7 +6,7 @@ export async function sendDataToBackend(formData) {
   console.log('Data sent to flask:', payload);
 
   try {
-    const res = await fetch('http://localhost:5000/predict', {         //To host it on another workstation just replace the ip with local host
+    const res = await fetch('http://localhost:5001/predict', {         //To host it on another workstation just replace the ip with local host
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

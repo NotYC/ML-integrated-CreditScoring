@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect MongoDB
-mongoose.connect('mongodb://capstone:project@172.19.150.21:27017/signupDB', {authSource: 'admin'})
+mongoose.connect('mongodb://user:pass@dest-ip:27017/signupDB', {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
@@ -40,8 +40,7 @@ app.get('/verify', async (req, res) => {
   const email = req.query.email;
   try {
     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
-    // Auto redirect to SignIn page (adjust path if needed)
-    res.redirect('http://localhost:5173/signin');
+    res.send("Email verified! You can now log in.");
   } catch (err) {
     res.status(400).send("Verification failed.");
   }
@@ -58,6 +57,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Backend running on http://localhost:5000");
+app.listen(5000, '0.0.0.0', () => {
+  console.log('Server is running...');
 });
+
