@@ -44,8 +44,8 @@ import Help from "./pages/Help"
 import MainLayout from './layout/MainLayout'
 import TransactionHistory from './pages/TransactionHistory'
 import Home from "./pages/Home"
-import AboutUs from "./pages/AboutUs" 
-
+import AboutUs from "./pages/AboutUs"
+import MyProfile from "./pages/MyProfile"
 
 function App() {
   return (
@@ -54,24 +54,23 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/linkbank" element={<LinkBank />} />
       
-      
-      {/* Routes for sidebar such that it remains constant */}
-      <Route element={<MainLayout />}>    
+      {/* Routes for sidebar (wrapped in MainLayout) */}
+      <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/help" element={<Help />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/about-us" element={<AboutUs />} />  {/* Added AboutUs route */}
-        <Route path="/my-banks" element={<Navigate to="/dashboard" replace />} />  {/* Redirect to dashboard for now */}
-        {/* Added the Transaction History route */}
-        <Route path="/transaction-history" element={<TransactionHistory />} />        
-        {/* Redirect /dashboard to /home if you want Home as the default */}
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/my-banks" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/transaction-history" element={<TransactionHistory />} />
+        <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/" element={<Navigate to="/home" replace />} />
       </Route>
       
-      {/* Catch all for undefined routes */}
+      {/* Catch all */}
       <Route path="*" element={<Navigate to="/signin" replace />} />
     </Routes>
   )
 }
 
 export default App
+// This code is a React component that sets up the routing for a web application using React Router. It defines routes for signing in, signing up, linking a bank, and various pages within the app, including a dashboard, help page, home page, about us page, transaction history, and user profile. The sidebar navigation is handled by wrapping certain routes in a `MainLayout` component. The app redirects to the sign-in page for any undefined routes.

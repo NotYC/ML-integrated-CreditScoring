@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import dashboard from '../assets/dashboard.png';
+import Cookies from 'js-cookie';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -24,6 +25,11 @@ function SignIn() {
       if (!data.success) {
         setError(data.message);
       } else {
+        // Store user details in cookies
+        Cookies.set('email', data.user.email);
+        Cookies.set('firstname', data.user.firstname);
+        Cookies.set('lastname', data.user.lastname);
+
         alert('Login successful!');
         navigate('/home'); // navigate to dashboard
       }
@@ -108,4 +114,3 @@ function SignIn() {
 }
 
 export default SignIn;
-// This code is a React component for a Sign In page. It includes a form for users to enter their email and password, and handles form submission to log the user in. If the login is successful, the user is redirected to the dashboard. The right side of the page displays an image related to the dashboard.

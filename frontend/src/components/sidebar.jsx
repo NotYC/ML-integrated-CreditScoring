@@ -116,7 +116,8 @@
 
 // export default Sidebar;
 
-// final sidebar
+// final sidebar(updated)
+// Sidebar.jsx
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo-removebg-preview.png';
@@ -129,6 +130,20 @@ import bank from '../assets/Bank.svg';
 const Sidebar = () => {
   const location = useLocation();
   const [isExpanded, setIsExpanded] = useState(true);
+
+  // Retrieve user object from localStorage (ensure this is set at login)
+  const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+  const userEmail = storedUser.email || 'yourname@email.com';
+  const userName = storedUser.username || 'Your Name';
+
+  // Function to compute initials from userName
+  const getInitials = (name) => {
+    const parts = name.trim().split(' ');
+    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+    return parts.map(part => part.charAt(0).toUpperCase()).join('');
+  };
+
+  const initials = getInitials(userName);
 
   const isActive = (path) => {
     if (path === "/Home") return location.pathname === "/Home" || location.pathname === "/";
@@ -177,45 +192,56 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
-      {isExpanded && (
-        <div className="space-y-6 mb-8">
-          <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="text-sm mb-4 font-medium">YOUR BANK</div>
-            <div className="text-xl font-bold tracking-widest mb-2">XXXX XXXX XXXX XXXX</div>
-            <div className="text-xs flex justify-between">
-              <div>VALID FROM<br />MM/YY</div>
-              <div>VALID TO<br />MM/YY</div>
+      {/* Bottom Section - Profile Preview */}
+      <Link to="/myprofile">
+        {isExpanded ? (
+          <div className="space-y-6 mb-8 cursor-pointer">
+            <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="text-sm mb-4 font-medium">YOUR BANK</div>
+              <div className="text-xl font-bold tracking-widest mb-2">XXXX XXXX XXXX XXXX</div>
+              <div className="text-xs flex justify-between">
+                <div>VALID FROM<br />MM/YY</div>
+                <div>VALID TO<br />MM/YY</div>
+              </div>
+              <div className="mt-2 text-xs">ACCOUNT HOLDER'S NAME</div>
             </div>
-            <div className="mt-2 text-xs">ACCOUNT HOLDER'S NAME</div>
-          </div>
 
-          <div className="flex items-center space-x-2">
-            <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg">X</div>
-            <div>
-              <div className="font-bold text-sm">Your Name</div>
-              <div className="text-xs text-gray-500">yourname@email.com</div>
+            <div className="flex items-center space-x-2">
+              <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg">
+                {initials}
+              </div>
+              <div>
+                <div className="font-bold text-sm">{userName}</div>
+                <div className="text-xs text-gray-500">{userEmail}</div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="mb-4 flex justify-center">
+            <div
+              className="cursor-pointer bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg hover:scale-105 transition"
+              title={`${userName} | ${userEmail}`}
+            >
+              {initials}
+            </div>
+          </div>
+        )}
+      </Link>
     </aside>
   );
 };
 
-const SidebarLink = ({ to, text, icon, active, expanded }) => {
-  return (
-    <Link to={to} className="w-full">
-      <div
-        className={`flex items-center px-4 py-3 rounded-md font-medium transition-all duration-200 transform hover:scale-[1.03] ${
-          active ? 'bg-blue-500 text-white' : 'text-black hover:text-blue-600'
-        }`}
-      >
-        <img src={icon} alt={`${text} icon`} className="w-6 h-6" />
-        {expanded && <span className="ml-4">{text}</span>}
-      </div>
-    </Link>
-  );
-};
+const SidebarLink = ({ to, text, icon, active, expanded }) => (
+  <Link to={to} className="w-full">
+    <div
+      className={`flex items-center px-4 py-3 rounded-md font-medium transition-all duration-200 transform hover:scale-[1.03] ${
+        active ? 'bg-blue-500 text-white' : 'text-black hover:text-blue-600'
+      }`}
+    >
+      <img src={icon} alt={`${text} icon`} className="w-6 h-6" />
+      {expanded && <span className="ml-4">{text}</span>}
+    </div>
+  </Link>
+);
 
 export default Sidebar;
