@@ -62,7 +62,7 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/my-banks" element={<Navigate to="/dashboard" replace />} />
         <Route path="/transaction-history" element={<TransactionHistory />} />
-        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/MyProfile" element={<MyProfile />} />
         <Route path="/" element={<Navigate to="/home" replace />} />
       </Route>
       

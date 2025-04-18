@@ -216,7 +216,7 @@ const MyProfile = () => {
         {error && <p className="mt-4 text-red-600">{error}</p>}
 
         <button
-          className="mt-6 text-blue-600 hover:underline"
+          className="mt-6 text-white hover:underline"
           onClick={() => navigate(-1)}
         >
           Back

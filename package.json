@@ -1,8 +1,19 @@
 {
   "dependencies": {
     "axios": "^1.8.4",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "date-fns": "^4.1.0",
+    "express": "^5.1.0",
     "framer-motion": "^12.7.2",
+    "mongoose": "^8.13.2",
     "react-datepicker": "^8.3.0"
+  },
+  "scripts": {
+    "start:updateProfile": "node updateProfile/server.js",
+    "dev:updateProfile": "nodemon updateProfile/server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
