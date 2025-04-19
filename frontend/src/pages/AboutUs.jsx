@@ -119,7 +119,7 @@ const AboutUs = () => {
     {
       id: 1,
       name: "Agni",
-      role: "Project Lead",
+      role: "ML Modeler",
       image: ""
     },
     {
@@ -131,20 +131,20 @@ const AboutUs = () => {
     {
       id: 3,
       name: "Samarth",
-      role: "Backend Developer",
+      role: "Frontend Developer",
       image: ""
     },
 
     {
         id: 4,
         name: "Gautam",
-        role: "Backend Developer",
+        role: "Database Designer",
         image: ""
     },
     {
         id: 5,
         name: "Yuvraj",
-        role: "Database",
+        role: "Backend Developer",
         image: ""
     }
   ];
