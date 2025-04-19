@@ -36,6 +36,13 @@ const Home = () => {
       setScore(result.score);
       setRating(result.rating);
     }
+
+    await fetch('http://localhost:5000/api/credit-history', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ score: result.score }),
+    });
   };
 
   const resetForm = () => {

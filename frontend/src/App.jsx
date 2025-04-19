@@ -47,6 +47,7 @@ import Home from "./pages/Home"
 import AboutUs from "./pages/AboutUs"
 import MyProfile from "./pages/MyProfile"
 import MyBank from './pages/MyBanks'
+import CreditHistory from './pages/CreditHistory';
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/mybank" element={<MyBank />} />
         <Route path="/transaction-history" element={<TransactionHistory />} />
+        <Route path="/credit-history" element={<CreditHistory />} />
         <Route path="/MyProfile" element={<MyProfile />} />
         <Route path="/" element={<Navigate to="/home" replace />} />
         
