@@ -63,7 +63,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/mybank" element={<MyBank />} />
-        <Route path="/transaction-history" element={<TransactionHistory />} />
+        {/* <Route path="/transaction-history" element={<TransactionHistory />} /> */}
         <Route path="/credit-history" element={<CreditHistory />} />
         <Route path="/MyProfile" element={<MyProfile />} />
         <Route path="/" element={<Navigate to="/home" replace />} />
