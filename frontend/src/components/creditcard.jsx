@@ -1,14 +1,14 @@
 import React from 'react';
 import './CreditCard.css';
+import chip from '../assets/chip.svg';
+import visa from '../assets/visa_logo.svg';
 
 const CreditCard = () => {
   return (
     <div className="credit-card-container">
-      
       <div className="card">
         {/* FRONT SIDE */}
         <div className="card__front card__part">
-          {/* SVG Background embedded inline */}
           <svg className="card__background" viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -22,30 +22,23 @@ const CreditCard = () => {
                 <circle cx="20" cy="20" r="15" fill="rgba(255, 255, 255, 0.05)" />
               </pattern>
             </defs>
-            
-            {/* Card background with gradient */}
+
             <rect width="320" height="190" rx="10" ry="10" fill="url(#cardGradient)" />
-            
-            {/* Pattern overlay */}
             <rect width="320" height="190" rx="10" ry="10" fill="url(#patternCircles)" />
-            
-            {/* Abstract design elements */}
             <path d="M0,95 Q80,30 160,95 T320,95" stroke="rgba(255,255,255,0.1)" strokeWidth="20" fill="none" />
             <path d="M0,130 Q80,65 160,130 T320,130" stroke="rgba(255,255,255,0.07)" strokeWidth="25" fill="none" />
-            
-            {/* Decorative circles */}
             <circle cx="280" cy="40" r="60" fill="rgba(255,255,255,0.03)" />
             <circle cx="40" cy="160" r="80" fill="rgba(255,255,255,0.03)" />
           </svg>
 
           <img
             className="card__front-square card__square"
-            src="/api/placeholder/30/30"
+            src={chip}
             alt="chip"
           />
           <img
             className="card__front-logo card__logo"
-            src="/api/placeholder/100/16"
+            src={visa}
             alt="visa"
           />
           <p className="card_numer">**** **** **** 6258</p>
@@ -58,10 +51,9 @@ const CreditCard = () => {
             <p className="card__info">10/25</p>
           </div>
         </div>
-        
+
         {/* BACK SIDE */}
         <div className="card__back card__part">
-          {/* SVG Background for back side */}
           <svg className="card__background" viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="cardGradientBack" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -75,18 +67,11 @@ const CreditCard = () => {
                 <circle cx="20" cy="20" r="15" fill="rgba(255, 255, 255, 0.05)" />
               </pattern>
             </defs>
-            
-            {/* Card background with gradient */}
+
             <rect width="320" height="190" rx="10" ry="10" fill="url(#cardGradientBack)" />
-            
-            {/* Pattern overlay */}
             <rect width="320" height="190" rx="10" ry="10" fill="url(#patternCirclesBack)" />
-            
-            {/* Abstract design elements */}
             <path d="M0,95 Q80,30 160,95 T320,95" stroke="rgba(255,255,255,0.1)" strokeWidth="20" fill="none" />
             <path d="M0,130 Q80,65 160,130 T320,130" stroke="rgba(255,255,255,0.07)" strokeWidth="25" fill="none" />
-            
-            {/* Decorative circles */}
             <circle cx="280" cy="40" r="60" fill="rgba(255,255,255,0.03)" />
             <circle cx="40" cy="160" r="80" fill="rgba(255,255,255,0.03)" />
           </svg>
@@ -98,13 +83,13 @@ const CreditCard = () => {
             </div>
             <img
               className="card__back-square card__square"
-              src="/api/placeholder/30/30"
+              src={chip}
               alt="chip back"
             />
             <img
               className="card__back-logo card__logo"
-              src="/api/placeholder/100/16"
-              alt=""
+              src={visa}
+              alt="visa"
             />
           </div>
         </div>
