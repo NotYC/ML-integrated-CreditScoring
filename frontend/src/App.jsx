@@ -46,6 +46,7 @@ import TransactionHistory from './pages/TransactionHistory'
 import Home from "./pages/Home"
 import AboutUs from "./pages/AboutUs"
 import MyProfile from "./pages/MyProfile"
+import MyBank from './pages/MyBanks'
 
 function App() {
   return (
@@ -60,10 +61,11 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/my-banks" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/mybank" element={<MyBank />} />
         <Route path="/transaction-history" element={<TransactionHistory />} />
         <Route path="/MyProfile" element={<MyProfile />} />
         <Route path="/" element={<Navigate to="/home" replace />} />
+        
       </Route>
       
       {/* Catch all */}

@@ -174,7 +174,7 @@ const Sidebar = () => {
         {/* Navigation */}
         <div className="flex flex-col space-y-2">
           <SidebarLink to="/Home" text="Home" icon={home} active={isActive("/Home")} expanded={isExpanded} />
-          <SidebarLink to="/my-banks" text="My Banks" icon={bank} active={isActive("/my-banks")} expanded={isExpanded} />
+          <SidebarLink to="/mybank" text="My Banks" icon={bank} active={isActive("/mybank")} expanded={isExpanded} />
           <SidebarLink to="/transaction-history" text="Transaction History" icon={history} active={isActive("/transaction-history")} expanded={isExpanded} />
           <SidebarLink to="/about-us" text="About Us" icon={aboutus} active={isActive("/about-us")} expanded={isExpanded} />
           <SidebarLink to="/help" text="Help" icon={help} active={isActive("/help")} expanded={isExpanded} />
