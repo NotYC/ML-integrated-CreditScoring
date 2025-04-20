@@ -2,6 +2,7 @@
 
 export async function sendDataToBackend(formData) {
   try {
+    console.log(JSON.stringify(formData))
     const res = await fetch('http://localhost:5000/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

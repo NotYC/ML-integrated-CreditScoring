@@ -18,6 +18,7 @@ mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/signupDB`, {authS
 // Route to handle signup
 app.post('/signup', async (req, res) => {
   try {
+    console.log(req.body)
     const result = await registerUser(req.body);
     res.json(result);
   } catch (err) {
@@ -57,7 +58,7 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error during login' });
   }
 });
-
+console.log(`${process.env.backend_server}`)
 app.listen(5000, `${process.env.backend_server}`, () => {
   console.log('Server is running...');
 });
