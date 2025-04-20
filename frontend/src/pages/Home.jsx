@@ -111,8 +111,8 @@ const Home = () => {
             >
             <option value="">Select Education level</option>
             <option value="High School">High School</option>
-            <option value="Bachelors">Bachelors</option>
-            <option value="Masters">Masters</option>
+            <option value="Bachelors">Bachelor</option>
+            <option value="Masters">Master</option>
             <option value="PhD">PhD</option>
           </select>     
           <select
