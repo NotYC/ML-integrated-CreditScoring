@@ -8,8 +8,8 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS so Express can access it
 
 # Load model and preprocessor
-preprocessor = joblib.load("model/preprocessor.pkl")
-model = joblib.load("model/stacked_model.pkl")
+preprocessor = joblib.load("model/preprocessor1.pkl")
+model = joblib.load("model/stacked_model1.pkl")
 
 
 # Connect to MongoDB
