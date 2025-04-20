@@ -5,17 +5,17 @@ async function sendVerification(email) {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: '####',
+      user: `${process.env.Sender_Mail}`,
       pass: process.env.GMAIL_PASSWORD // not your real email password
     }
   });
 
-  const verificationLink = `http://host-ip:5000/verify?email=${encodeURIComponent(email)}`;
+  const verificationLink = `http://${process.env.host_ip}:5000/verify?email=${encodeURIComponent(email)}`;
 
   await transporter.sendMail({
-    from: '"Your App" <####@gmail.com>',
+    from: `"KYCS Sign-Up Verification" <${process.env.Sender_Mail}>`,
     to: email,
-    subject: 'Please verify your email',
+    subject: 'A sign-up attempt was made from this email.\nIf it was you, Please verify your email',
     html: `<h2>Verify your email</h2><p><a href="${verificationLink}">Click here to verify</a></p>`
   });
 }

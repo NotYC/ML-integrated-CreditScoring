@@ -26,9 +26,9 @@ function SignIn() {
         setError(data.message);
       } else {
         // Store user details in cookies
-        Cookies.set('email', data.user.email);
-        Cookies.set('firstname', data.user.firstname);
-        Cookies.set('lastname', data.user.lastname);
+        //Cookies.set('email', data.user.email);
+        //Cookies.set('firstname', data.user.firstname);
+        //Cookies.set('lastname', data.user.lastname);
 
         alert('Login successful!');
         navigate('/home'); // navigate to dashboard

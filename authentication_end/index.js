@@ -4,13 +4,14 @@ const cors = require('cors');
 const loginUser = require('./loginUser');
 const registerUser = require('./registerUser');
 const User = require('./mongoFrame/userFrame.js');
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Connect MongoDB
-mongoose.connect('mongodb://user:pass@dest-ip:27017/signupDB', {authSource: 'admin'})
+mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/signupDB`, {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
@@ -57,7 +58,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.listen(5000, '0.0.0.0', () => {
+app.listen(5000, `${process.env.backend_server}`, () => {
   console.log('Server is running...');
 });
 
