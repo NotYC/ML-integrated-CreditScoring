@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const loginUser = require('./loginUser');
-const registerUser = require('./registerUser');
+const loginUser = require('./auth_2/loginUser');
+const registerUser = require('./auth_2/registerUser');
 const User = require('./mongoFrame/userFrame.js');
 require('dotenv').config();
 

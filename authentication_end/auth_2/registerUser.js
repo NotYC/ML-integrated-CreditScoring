@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('./mongoFrame/userFrame.js');
+const User = require('../mongoFrame/userFrame.js');
 const sendVerification = require('./sendVerification');
 
 async function registerUser(data) {

@@ -1,6 +1,6 @@
 // loginUser.js
 const bcrypt = require('bcrypt');
-const User = require('./mongoFrame/userFrame.js');
+const User = require('../mongoFrame/userFrame.js');
 
 async function loginUser(data) {
   const { email, password } = data;
