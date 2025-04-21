@@ -102,13 +102,19 @@ const Home = () => {
             placeholder="Enter your Profession"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
-          <input
+          <select
             name="education"
             value={formData.education}
             onChange={handleChange}
             placeholder="Enter your Education Level"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
-          />
+            >
+            <option value="">Select Education level</option>
+            <option value="High School">High School</option>
+            <option value="Bachelors">Bachelor</option>
+            <option value="Masters">Master</option>
+            <option value="PhD">PhD</option>
+          </select>     
           <select
               name="employment_status"
               value={formData.employment_status}
