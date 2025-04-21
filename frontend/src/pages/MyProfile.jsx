@@ -83,7 +83,7 @@ const MyProfile = () => {
 
       const data = await res.json();
       if (data.success) {
-        setMessage('Profile updated successfully!');
+        setMessage(data.message);
         setError('');
         setShowPasswordPrompt(false);
         setEditMode(false);

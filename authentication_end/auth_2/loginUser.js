@@ -21,7 +21,7 @@ async function loginUser(data) {
     return { success: false, message: "Incorrect password" };
   }
 
-  return { success: true, message: "Login successful", userId: user._id, username: user.username };
+  return { success: true, message: "Login successful", userId: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email };
 }
 
 module.exports = loginUser;

@@ -28,7 +28,9 @@ async function registerUser(data) {
     uid,
     email,
     password: hashedPassword,
-    isVerified: "NO"
+    isVerified: "NO",
+    phone: "NO",
+    profilePhoto: "NILL"
   });
 
   await newUser.save();
