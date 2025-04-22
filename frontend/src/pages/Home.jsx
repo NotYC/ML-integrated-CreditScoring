@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { sendDataToBackend } from "../../../Backend_STR/config/model2server.js";
+import { sendDataToBackend } from "../../../authentication_end/Flask_middleware/model2server.js";
 
 const Home = () => {
   const [formData, setFormData] = useState({
