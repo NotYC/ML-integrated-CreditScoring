@@ -40,14 +40,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: ffffff;
+  background-color: #3B82F6;
   cursor: pointer;
-  color: #242424;
+  color: #ffffff;
   align-self: center;
   transition: border-color 0.25s;
 }
 button:hover {
-  background-color: #3B82F6;
+  background-color: #0252d2;
 }
 
 @media (prefers-color-scheme: light) {

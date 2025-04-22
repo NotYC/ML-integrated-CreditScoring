@@ -42,7 +42,6 @@ import Dashboard from './pages/Dashboard'
 import LinkBank from './pages/LinkBank'
 import Help from "./pages/Help"
 import MainLayout from './layout/MainLayout'
-import TransactionHistory from './pages/TransactionHistory'
 import Home from "./pages/Home"
 import AboutUs from "./pages/AboutUs"
 import MyProfile from "./pages/MyProfile"
