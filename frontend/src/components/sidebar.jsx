@@ -65,7 +65,7 @@ const Sidebar = () => {
           <SidebarLink to="/help" text="Help" icon={help} active={isActive("/help")} expanded={isExpanded} />
           <button
               onClick={toggleSidebar}
-              className="w-5 flex items-center bg-white justify-center h-10 text-white hover:text-black transition text-xl"
+              className="flex items-center justify-center h-12 w-12 text-white hover:text-black transition text-xl"
               title={isExpanded ? "Collapse Sidebar" : "Expand Sidebar"}
             >
               {isExpanded ? '«' : '»'}
