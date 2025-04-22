@@ -13,7 +13,9 @@ const generationHistorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Bank',
         required: true
-    }
+    },              
+    score: { type: String, required: true },              
+    rating: { type: String, required: true }
 }, {
     timestamps: true // adds createdAt and updatedAt
 });

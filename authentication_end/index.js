@@ -4,6 +4,7 @@ const cors = require('cors');
 const loginUser = require('./auth_2/loginUser');
 const registerUser = require('./auth_2/registerUser');
 const User = require('./mongoFrame/userFrame.js');
+const Bank = require('./mongoFrame/bankFrame.js');
 const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Connect MongoDB
-mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/signupDB`, {authSource: 'admin'})
+mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/KYCS`, {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
@@ -35,23 +36,39 @@ app.post('/signup', async (req, res) => {
 });
 
 // Route to handle email verification
-// app.get('/verify', async (req, res) => {
-//   const email = req.query.email;
-//   try {
-//     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
-//     res.send("Email verified! You can now log in.");
-//   } catch (err) {
-//     res.status(400).send("Verification failed.");
-//   }
-// });
-
 app.get('/verify', async (req, res) => {
   const email = req.query.email;
   try {
     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
+    const newUser = await User.findOne({ email });
+    
+    
+    // Check if default bank already exists.
+    const existingBank = await Bank.findOne({
+      userId: newUser._id,
+      bankName: `${newUser.firstName}'s_account`
+    });
+
+    // If not, create a default bank account.
+    if (!existingBank) {
+      const newBank = new Bank({
+        userId: newUser._id,
+        bankName: `${newUser.firstName}'s_account`,
+        branch: "Default Branch",
+        accountNumber: "0000000000",
+        ifsc: "DEFAULTIFSC",
+        accountType: "DEFAULTTYPE",
+        pan: "DEFAULTPAN",
+        phone: "DEFAULTPHONE"
+      });
+      await newBank.save();
+    }
+
     res.send("Email verified! You can now log in.");
   } catch (err) {
+    console.error("Verification error:", err); 
     res.status(400).send("Verification failed.");
+
   }
 });
 //yha se myProfile ka backend shuru

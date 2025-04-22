@@ -29,8 +29,8 @@ async function registerUser(data) {
     email,
     password: hashedPassword,
     isVerified: "NO",
-    phone: "NO",
-    profilePhoto: "NILL"
+    phone: "Enter your phone number",
+    profilePhoto: "Upload a photo",
   });
 
   await newUser.save();
