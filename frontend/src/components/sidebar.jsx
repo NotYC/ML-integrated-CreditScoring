@@ -164,11 +164,13 @@ const Sidebar = () => {
       <div>
         {/* Logo */}
         <div className="flex justify-center mb-10">
-          <img
-            src={logo}
-            alt="Logo"
-            className={`object-contain transition-all duration-300 ${isExpanded ? "h-24" : "h-12"}`}
+          <Link to="/Help">
+            <img
+              src={logo}
+              alt="Logo"
+              className={`object-contain transition-all duration-300 ${isExpanded ? "h-24" : "h-12"}`}
           />
+          </Link>
         </div>
 
         {/* Navigation */}
