@@ -13,10 +13,14 @@ async function sendVerification(email) {
   const verificationLink = `http://${process.env.backend_server}:${process.env.back_port}/verify?email=${encodeURIComponent(email)}`;
 
   await transporter.sendMail({
-    from: `"KYCS Sign-Up Verification" <${process.env.Sender_Mail}>`,
+    from: `"KYCS: Know your Credit Score" <${process.env.Sender_Mail}>`,
     to: email,
-    subject: 'A sign-up attempt was made from this email.\nIf it was you, Please verify your email',
-    html: `<h2>Verify your email</h2><p><a href="${verificationLink}">Click here to verify</a></p>`
+    subject: 'KYCS Sign-Up Verification',
+    html: `<h2>Welcome to Know Your Credit Score</h2>
+<p>We received a sign-up request using your email. If this was you, please confirm your email by clicking the button below:</p>
+<p><a href="${verificationLink}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none;">Verify Email</a></p>
+<p>If you didn’t request this, you can safely ignore this message.</p>
+`
   });
 }
 
