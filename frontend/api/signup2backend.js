@@ -1,9 +1,11 @@
 // frontend/src/api/sendDataToBackend.js
+const backS = import.meta.env.VITE_BACKEND_SERVER;
+const backP = import.meta.env.VITE_BACK_PORT;
 
 export async function sendDataToBackend(formData) {
   try {
     console.log(JSON.stringify(formData))
-    const res = await fetch('http://localhost:5000/signup', {
+    const res = await fetch(`http://${backS}:${backP}/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)

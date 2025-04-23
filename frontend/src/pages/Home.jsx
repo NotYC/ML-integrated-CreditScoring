@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import { sendDataToBackend } from "../../api/frontend2flask.js";
 import { sendLogtoBackend} from "../../api/credithistory.js"
 
+
 const Home = () => {
   const [formData, setFormData] = useState({
     name: '',

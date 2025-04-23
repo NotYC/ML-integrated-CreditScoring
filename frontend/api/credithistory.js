@@ -1,11 +1,13 @@
 // frontend/src/api/creditHistory.js
+const backS = import.meta.env.VITE_BACKEND_SERVER;
+const backP = import.meta.env.VITE_BACK_PORT;
 
 export async function sendLogtoBackend(payload,score,rating,logEmail) {
     try {
         
       const dataLog = { ...payload, score, rating,logEmail };
       console.log('Data sent to backend:', dataLog);  
-      const res = await fetch('http://localhost:5000/logHandler', {
+      const res = await fetch(`http://${backS}:${backP}/logHandler`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataLog)

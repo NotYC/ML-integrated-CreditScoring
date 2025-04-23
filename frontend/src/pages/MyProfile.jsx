@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+const backS = import.meta.env.VITE_BACKEND_SERVER;
+const backP = import.meta.env.VITE_BACK_PORT;
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ const MyProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/userdata?email=${email}`);
+        const res = await fetch(`http://${backS}:${backP}/userdata?email=${email}`);
         const data = await res.json();
         if (data.success) {
           setProfile(data.user);
@@ -76,7 +78,7 @@ const MyProfile = () => {
       formData.append('address', profile.address);
       if (newPhoto) formData.append('profilePhoto', newPhoto);
 
-      const res = await fetch('http://localhost:5000/updateProfile', {
+      const res = await fetch(`http://${backS}:${backP}/updateProfile`, {
         method: 'PUT',
         body: formData,
       });

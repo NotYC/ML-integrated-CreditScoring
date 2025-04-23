@@ -137,6 +137,8 @@ import dashboard from '../assets/dashboard.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { sendDataToBackend } from '../../api/signup2backend.js';
+const backS = import.meta.env.VITE_BACKEND_SERVER;
+const backP = import.meta.env.VITE_BACK_PORT;
 
 
 function SignUp() {
