@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Cookies from 'js-cookie'
-import { sendDataToBackend } from "../../../authentication_end/Flask_middleware/model2server.js";
+import { sendDataToBackend } from "../../api/frontend2flask.js";
 import { sendLogtoBackend} from "../../api/credithistory.js"
 
 const Home = () => {

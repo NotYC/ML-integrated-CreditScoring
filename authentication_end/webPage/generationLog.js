@@ -4,7 +4,7 @@ const generationHistory = require('../mongoFrame/generationHistory.js')
 
 async function logRegisterer(dataLog) {
   const email = dataLog.logEmail;
-  const currUser = await User.findOne({ email});
+  const currUser = await User.findOne({email});
     if (!currUser) {
         return { success: false, message: "User not found" };
     }

@@ -10,9 +10,9 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 const app = express();
-//app.use(cors());
+
 app.use(cors({
-  origin: 'http://localhost:5173', // your frontend's URL
+  origin: `http://${process.env.frontend_server}:${process.env.front_port}`, // your frontend's URL stored in .env file
   credentials: true
 }));
 
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Connect MongoDB
-mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/KYCS`, {authSource: 'admin'})
+mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/${process.env.mongoCollection}`, {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
@@ -42,8 +42,7 @@ app.get('/verify', async (req, res) => {
   try {
     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
     const newUser = await User.findOne({ email });
-    
-    
+
     // Check if default bank already exists.
     const existingBank = await Bank.findOne({
       userId: newUser._id,
@@ -65,8 +64,7 @@ app.get('/verify', async (req, res) => {
       await newBank.save();
     }
 
-    res.send("Email verified! You can now log in.");
-    //res.redirect('http://localhost:5173/signin');
+    res.redirect(`http://${process.env.frontend_server}:${process.env.front_port}/signin`);
   } catch (err) {
     console.error("Verification error:", err); 
     res.status(400).send("Verification failed.");
@@ -129,15 +127,12 @@ app.post('/logHandler', async (req, res) => {
     console.log(req.body)
     const result = await logRegisterer(req.body);
     res.json(result);
-    
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: 'Error during logging' });
   }
 })
-
-
 
 // Route to handle login
 app.post('/login', async (req, res) => {
@@ -161,6 +156,6 @@ app.post('/login', async (req, res) => {
   }
 });
 console.log(`${process.env.backend_server}`)
-app.listen(5000, `${process.env.backend_server}`, () => {
+app.listen(process.env.back_port, `${process.env.backend_server}`, () => {
   console.log('Server is running...');
 });
