@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Cookies from 'js-cookie'
 import { sendDataToBackend } from "../../../authentication_end/Flask_middleware/model2server.js";
+import { sendLogtoBackend} from "../../api/credithistory.js"
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -30,11 +32,18 @@ const Home = () => {
   const handleGenerate = async () => {
     const { name, work_experience, ...payload } = formData;
     console.log("Sending to backend:", payload);
-
+    const logEmail = Cookies.get('email');
     const result = await sendDataToBackend(payload);
     if (result?.score) {
       setScore(result.score);
       setRating(result.rating);
+      const { name, work_experience,age,education,employment_status,marital_status,profession, ...payload } = formData;
+      const logResult = await sendLogtoBackend(payload,score,rating,logEmail);
+      if (logResult.success) {
+        console.log("Log saved successfully:", logResult.message);
+      } else {
+        console.error("Error saving log:", logResult.message);
+      }
     }
   };
 

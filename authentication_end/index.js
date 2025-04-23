@@ -5,6 +5,7 @@ const loginUser = require('./auth_2/loginUser');
 const registerUser = require('./auth_2/registerUser');
 const User = require('./mongoFrame/userFrame.js');
 const Bank = require('./mongoFrame/bankFrame.js');
+const logRegisterer = require('./webPage/generationLog.js')
 const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
@@ -121,6 +122,18 @@ app.put('/updateProfile', upload.single('profilePhoto'), async (req, res) => {
 });
 
 
+app.post('/logHandler', async (req, res) => {
+  try {
+    console.log(req.body)
+    const result = await logRegisterer(req.body);
+    res.json(result);
+    
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Error during logging' });
+  }
+})
 
 
 
