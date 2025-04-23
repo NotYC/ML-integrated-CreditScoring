@@ -44,3 +44,9 @@ This project is a **Machine Learning Integrated Credit Scoring System** that pre
    ```bash
    git clone https://github.com/yourusername/ml-integrated-credit-scoring.git
    cd ml-integrated-credit-scoring
+   
+### ML Model (Flask)
+
+2. Run the Flask Applicatiom
+   ```bash
+   cd ml-integrated-credit-scoring/PipeLine Blueprint/model side
