@@ -63,15 +63,6 @@ def predict():
         else:
             rating = "Poor"
 
-        # # Save to MongoDB
-        # document = {
-        #     "input": features,
-        #     "score": score,
-        #     "rating": rating,
-        #     "timestamp": datetime.utcnow()  # Optional
-        # }
-        # collection.insert_one(document)
-
         # Send response
         response = {"score": score, "rating": rating}
         print("Sent response:", response)

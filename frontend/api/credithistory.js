@@ -1,4 +1,4 @@
-// frontend/src/api/creditHistory.js
+// frontend/src/api/credithistory.js
 const backS = import.meta.env.VITE_BACKEND_SERVER;
 const backP = import.meta.env.VITE_BACK_PORT;
 
