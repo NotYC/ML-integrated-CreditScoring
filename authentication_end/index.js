@@ -66,12 +66,14 @@ app.get('/verify', async (req, res) => {
     }
 
     res.send("Email verified! You can now log in.");
+    //res.redirect('http://localhost:5173/signin');
   } catch (err) {
     console.error("Verification error:", err); 
     res.status(400).send("Verification failed.");
 
   }
 });
+
 //yha se myProfile ka backend shuru
 app.get('/userdata', async (req, res) => {
   const email = req.query.email;
