@@ -5,3 +5,4 @@ xgboost
 pymongo
 joblib
 numpy
+flask_cors

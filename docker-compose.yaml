@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    container_name: creditscore_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+      - ml_model
+
+  backend:
+    build:
+      context: ./authentication_end
+    ports:
+      - "5000:5000"
+    container_name: creditscore_backend
+    restart: unless-stopped
+    depends_on:
+      - ml_model
+
+  ml_model:
+    build:
+      context: ./PipeLine Blueprint/model side
+    ports:
+      - "8000:8000"
+    container_name: creditscore_ml_model
+    restart: unless-stopped
