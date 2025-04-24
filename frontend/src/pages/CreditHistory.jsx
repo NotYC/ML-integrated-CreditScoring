@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { getScoreColor, getRatingBadge } from '../components/ScoreRatingDisplay';
+const backS = import.meta.env.VITE_BACKEND_SERVER;
+const backP = import.meta.env.VITE_BACK_PORT;
 
 const CreditHistory = () => {
   const [history, setHistory] = useState([]);
@@ -10,7 +12,7 @@ const CreditHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       const email = Cookies.get('email');
-      const res = await fetch(`http://192.168.137.202:5000/credit-history?email=${email}`);
+      const res = await fetch(`http://${backS}:${backP}/credit-history?email=${email}`);
       const data = await res.json();
       if (data.success) setHistory(data.history);
     };
