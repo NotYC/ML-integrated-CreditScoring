@@ -59,6 +59,7 @@ const Home = () => {
 
   return (
     <main className="flex-1 p-8 space-y-8 bg-white text-black">
+
       {/* Personal Information Section */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Personal Info</h2>
