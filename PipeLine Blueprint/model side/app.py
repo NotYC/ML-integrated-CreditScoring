@@ -4,9 +4,13 @@ import pymongo
 from flask_cors import CORS
 import pandas as pd
 from datetime import datetime  # Optional: to store timestamp
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS so Express or any frontend can access it
+
+load_dotenv()
 
 # Load model and preprocessor
 preprocessor = joblib.load("model/preprocessor1.pkl")
@@ -59,15 +63,6 @@ def predict():
         else:
             rating = "Poor"
 
-        # # Save to MongoDB
-        # document = {
-        #     "input": features,
-        #     "score": score,
-        #     "rating": rating,
-        #     "timestamp": datetime.utcnow()  # Optional
-        # }
-        # collection.insert_one(document)
-
         # Send response
         response = {"score": score, "rating": rating}
         print("Sent response:", response)
@@ -77,4 +72,5 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    print(os.getenv("flask_server"))
+    app.run(host=os.getenv("flask_server"), port=os.getenv("flask_port"))

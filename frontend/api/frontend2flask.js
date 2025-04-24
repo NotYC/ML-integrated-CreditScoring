@@ -1,3 +1,6 @@
+const flaskS = import.meta.env.VITE_FLASK_SERVER;
+const flaskP = import.meta.env.VITE_FLASK_PORT;
+
 export async function sendDataToBackend(formData) {
   // Prepare the payload by removing dummy fields (if necessary)
   const { name, work_experience, ...payload } = formData; // Adjust as needed for your form data
@@ -6,7 +9,7 @@ export async function sendDataToBackend(formData) {
   console.log('Data sent to flask:', payload);
 
   try {
-    const res = await fetch('http://localhost:5001/predict', {         //To host it on another workstation just replace the ip with local host
+    const res = await fetch(`http://${flaskS}:${flaskP}/predict`, {         //To host it on another workstation just replace the ip with local host
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

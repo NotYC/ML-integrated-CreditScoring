@@ -1,25 +1,3 @@
-// const mongoose = require('mongoose');
-//
-//
-// const bankSchema = new mongoose.Schema({
-//     bankName: { type: String, required: true },
-//     branch: { type: String, required: true },
-//     accountNumber: { type: String, required: true },
-//     ifsc: { type: String, required: true },
-//     accountType: { type: String, required: true },
-//     pan: { type: String, required: true },
-//     phone: { type: String, required: false },
-//     email: {
-//         type: String,
-//         required: true,
-//         ref: 'User'
-//     }
-// }, {
-//     timestamps: true // adds createdAt and updatedAt automatically
-// });
-//
-// module.exports = mongoose.model('Bank', bankSchema);
-
 const mongoose = require('mongoose');
 
 const bankSchema = new mongoose.Schema({

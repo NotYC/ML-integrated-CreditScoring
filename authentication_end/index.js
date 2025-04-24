@@ -5,14 +5,15 @@ const loginUser = require('./auth_2/loginUser');
 const registerUser = require('./auth_2/registerUser');
 const User = require('./mongoFrame/userFrame.js');
 const Bank = require('./mongoFrame/bankFrame.js');
+const GenerationHistory = require('./mongoFrame/generationHistory.js');
 const logRegisterer = require('./webPage/generationLog.js')
 const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 const app = express();
-//app.use(cors());
+
 app.use(cors({
-  origin: 'http://localhost:5173', // your frontend's URL
+  origin: `http://${process.env.frontend_server}:${process.env.front_port}`, // your frontend's URL stored in .env file
   credentials: true
 }));
 
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Connect MongoDB
-mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/KYCS`, {authSource: 'admin'})
+mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/${process.env.mongoCollection}`, {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
@@ -42,8 +43,7 @@ app.get('/verify', async (req, res) => {
   try {
     await User.findOneAndUpdate({ email }, { isVerified: "YES" });
     const newUser = await User.findOne({ email });
-    
-    
+
     // Check if default bank already exists.
     const existingBank = await Bank.findOne({
       userId: newUser._id,
@@ -65,8 +65,7 @@ app.get('/verify', async (req, res) => {
       await newBank.save();
     }
 
-    res.send("Email verified! You can now log in.");
-    //res.redirect('http://localhost:5173/signin');
+    res.redirect(`http://${process.env.frontend_server}:${process.env.front_port}/signin`);
   } catch (err) {
     console.error("Verification error:", err); 
     res.status(400).send("Verification failed.");
@@ -74,7 +73,7 @@ app.get('/verify', async (req, res) => {
   }
 });
 
-//yha se myProfile ka backend shuru
+//myProfile backend
 app.get('/userdata', async (req, res) => {
   const email = req.query.email;
   try {
@@ -123,21 +122,17 @@ app.put('/updateProfile', upload.single('profilePhoto'), async (req, res) => {
   }
 });
 
-
 app.post('/logHandler', async (req, res) => {
   try {
     console.log(req.body)
     const result = await logRegisterer(req.body);
     res.json(result);
-    
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: 'Error during logging' });
   }
 })
-
-
 
 // Route to handle login
 app.post('/login', async (req, res) => {
@@ -160,7 +155,55 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error during login' });
   }
 });
+
+// in your main backend file (e.g. index.js), after your other routes:
+app.get('/credit-history', async (req, res) => {
+  try {
+    const email = req.query.email;
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email query parameter is required" });
+    }
+
+    // 1) find the user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // 2) find their (single) bank
+    const bank = await Bank.findOne({ userId: user._id });
+    if (!bank) {
+      // no bank linked → let frontend know
+      return res.json({ success: true, bankLinked: false, history: [] });
+    }
+    const bankId = bank._id;
+
+    // 3) fetch all score‐generations for that bank, newest first
+    const docs = await GenerationHistory
+      .find({ bankId })
+      .sort({ createdAt: -1 })
+      .populate('bankId', 'bankName'); // only pull bankName from the Bank
+      
+    console.log(docs)
+
+    // 4) shape the payload for the frontend
+    const history = docs.map(doc => ({
+      accountName: doc.bankId.bankName,
+      score:       doc.score,
+      rating:      doc.rating,
+      date:        doc.createdAt.toLocaleDateString()
+    }));
+
+    // 5) send success, bankLinked flag, and the array
+    res.json({ success: true, bankLinked: true, history });
+
+  } catch (err) {
+    console.error("Error fetching credit history:", err);
+    res.status(500).json({ success: false, message: "Failed to fetch credit history" });
+  }
+});
+
 console.log(`${process.env.backend_server}`)
-app.listen(5000, `${process.env.backend_server}`, () => {
+app.listen(process.env.back_port, `${process.env.backend_server}`, () => {
   console.log('Server is running...');
 });

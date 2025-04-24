@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import dashboard from '../assets/dashboard.png';
-import Cookies from 'js-cookie';
+const backS = import.meta.env.VITE_BACKEND_SERVER;
+const backP = import.meta.env.VITE_BACK_PORT;
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,9 @@ function SignIn() {
     setError(null); // reset error
 
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      console.log(backP)
+      console.log(backS)
+      const response = await fetch(`http://${backS}:${backP}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
