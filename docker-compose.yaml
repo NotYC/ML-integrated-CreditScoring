@@ -5,12 +5,18 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3000:3000"
+      - "5174:5174"
     container_name: creditscore_frontend
     restart: unless-stopped
     depends_on:
       - backend
       - ml_model
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - frontend_data:/app/data
+    networks:
+      - creditscore_net
 
   backend:
     build:
@@ -21,11 +27,73 @@ services:
     restart: unless-stopped
     depends_on:
       - ml_model
+      - mongodb
+    env_file:
+      - ./authentication_end/.env
+    volumes:
+      - backend_data:/app/data
+    networks:
+      - creditscore_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   ml_model:
     build:
-      context: ./PipeLine Blueprint/model side
+      context: "./PipeLine Blueprint/model side"
     ports:
-      - "8000:8000"
+      - "5001:5001"
     container_name: creditscore_ml_model
     restart: unless-stopped
+    env_file:
+      - "./PipeLine Blueprint/model side/.env"
+    volumes:
+      - model_data:/app/data
+    networks:
+      - creditscore_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  mongodb:
+    image: mongo:6.0
+    container_name: creditscore_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+    networks:
+      - creditscore_net
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: mypassword
+
+  mongo-express:
+    image: mongo-express
+    container_name: creditscore_mongo_express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mypassword
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - creditscore_net
+
+volumes:
+  frontend_data:
+  backend_data:
+  model_data:
+  mongodb_data:
+
+networks:
+  creditscore_net:
+    driver: bridge
