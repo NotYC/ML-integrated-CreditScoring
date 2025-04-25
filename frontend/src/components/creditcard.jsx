@@ -1,5 +1,5 @@
 import React from 'react';
-import './CreditCard.css';
+import './creditcard.css';
 import chip from '../assets/chip.svg';
 import visa from '../assets/visa_logo.svg';
 
