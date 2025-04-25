@@ -13,7 +13,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  origin: `http://${process.env.frontend_server}:${process.env.front_port}`, // your frontend's URL stored in .env file
+  origin: `http://localhost:5174`, // your frontend's URL stored in .env file
   credentials: true
 }));
 
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Connect MongoDB
-mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/${process.env.mongoCollection}`, {authSource: 'admin'})
+mongoose.connect(`mongodb://${process.env.mongo_connect}`, {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 
