@@ -6,6 +6,8 @@ import pandas as pd
 from datetime import datetime  # Optional: to store timestamp
 from dotenv import load_dotenv
 import os
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, message=".*WARNING: .*If you are loading a serialized model.*")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS so Express or any frontend can access it
