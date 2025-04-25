@@ -10,7 +10,7 @@ async function sendVerification(email) {
     }
   });
 
-  const verificationLink = `http://${process.env.backend_server}:${process.env.back_port}/verify?email=${encodeURIComponent(email)}`;
+  const verificationLink = `http://${process.env.HOST_IP}:${process.env.back_port}/verify?email=${encodeURIComponent(email)}`;
 
   await transporter.sendMail({
     from: `"KYCS: Know your Credit Score" <${process.env.Sender_Mail}>`,
