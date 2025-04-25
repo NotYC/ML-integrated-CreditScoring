@@ -6,3 +6,4 @@ pymongo
 joblib
 numpy
 flask_cors
+python-dotenv
