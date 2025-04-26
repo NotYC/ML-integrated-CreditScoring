@@ -12,11 +12,23 @@ require('dotenv').config();
 
 const app = express();
 
+const allowedOrigins = [
+   `http://${process.env.frontend_server}:${process.env.front_port}`,
+   'http://localhost:5002',
+   'http://127.0.0.1:5002',
+   'http://192.168.137.1:5002'
+ ];
 app.use(cors({
-  origin: `http://localhost:5174`, // your frontend's URL stored in .env file
-  credentials: true
-}));
 
+   origin: function (origin, callback) {
+     if (!origin || allowedOrigins.includes(origin)) {
+       callback(null, true);
+     } else {
+       callback(new Error('Not allowed by CORS'));
+     }
+   },
+   credentials: true
+ }));
 app.use(express.json());
 app.use(cookieParser());
 
