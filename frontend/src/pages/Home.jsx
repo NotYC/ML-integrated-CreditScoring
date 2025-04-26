@@ -36,10 +36,10 @@ const Home = () => {
     const logEmail = Cookies.get('email');
     const result = await sendDataToBackend(payload);
     if (result?.score) {
-      setScore(result.score);
+      setScore(score => result.score);
       setRating(result.rating);
       const { name, work_experience,age,education,employment_status,marital_status,profession, ...payload } = formData;
-      const logResult = await sendLogtoBackend(payload,score,rating,logEmail);
+      const logResult = await sendLogtoBackend(payload,result.score,rating,logEmail);
       if (logResult.success) {
         console.log("Log saved successfully:", logResult.message);
       } else {
