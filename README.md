@@ -50,3 +50,24 @@ This project is a **Machine Learning Integrated Credit Scoring System** that pre
 2. Run the Flask Applicatiom
    ```bash
    cd ml-integrated-credit-scoring/PipeLine Blueprint/model side
+
+
+### Instructions on how to run docker application of KYCS: 
+
+1.Pull the latest commit upto "deleted files" into your system while on main branch
+
+2.go to root directory of our capstone in terminal 
+
+3.type docker-compose -up --build
+
+4.open another terminal and go into bash of frontend "docker exec -it creditscore_frontend bash"
+
+5.go to the local host port 5174 
+
+6. Docker compose down once done!
+
+It should be working now
+
+Dont do any changes in main branch now
+
+If you want to change to before docker integration , make branch from "credit history chart" of sarab commit.
