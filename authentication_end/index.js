@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Connect MongoDB
-mongoose.connect(`mongodb://${process.env.mongo_connect}`, {authSource: 'admin'})
+mongoose.connect(`mongodb://${process.env.mongo_connect}:27017/${process.env.mongoCollection}`, {authSource: 'admin'})
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB error:", err));
 

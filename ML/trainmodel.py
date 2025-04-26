@@ -15,7 +15,7 @@ from sklearn.metrics import r2_score
 os.makedirs("model", exist_ok=True)
 
 # Load dataset
-df = pd.read_csv("C:\\Users\\Augni\\Desktop\\NIIT\\Academics\\SEM VI\\Capstone\\ML-integrated-CreditScoring\\ML\\synthetic_credit_scores.csv")
+df = pd.read_csv("F:\\CAPSTONE\\ML-integrated-CreditScoring\\ML\\synthetic_credit_scores.csv")
 
 # Define features
 numerical_features = [
@@ -86,7 +86,7 @@ r2 = r2_score(y_test, y_pred)
 print(f"R² score on test data: {r2:.4f}")
 
 # Save preprocessor and model separately
-joblib.dump(preprocessor, "model/preprocessor.pkl")
-joblib.dump(pipeline.named_steps['model'], "model/stacked_model.pkl")
+joblib.dump(preprocessor, "../PipeLineBlueprint/modelside/model/preprocessor.pkl")
+joblib.dump(pipeline.named_steps['model'], "../PipeLineBlueprint/modelside/model/stacked_model.pkl")
 
 print("✅ Model and preprocessor saved to /model")
