@@ -15,8 +15,8 @@ CORS(app)  # Enable CORS so Express or any frontend can access it
 load_dotenv()
 
 # Load model and preprocessor
-preprocessor = joblib.load("model/preprocessor1.pkl")
-model = joblib.load("model/stacked_model1.pkl")
+preprocessor = joblib.load("model/preprocessor.pkl")
+model = joblib.load("model/stacked_model.pkl")
 
 # Connect to MongoDB
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -44,6 +44,18 @@ def predict():
             'Length_of_Credit_History': float(data['credit_history']),
             'Bankruptcies': int(data['bankruptcies'])
         }
+                # Sanity check for all-zero or dummy inputs
+        if all([
+            features['Income'] == 0,
+            features['Number_of_Dependents'] == 0,
+            features['Credit_Utilization_Ratio'] == 0,
+            features['Missed_Payments_90days'] == 0,
+            features['Total_Credit_Accounts'] == 0,
+            features['Debt_to_Income_Ratio'] == 0,
+            features['Length_of_Credit_History'] == 0,
+            features['Bankruptcies'] == 0,
+        ]):
+            return jsonify({"error": "Invalid input: all-zero or empty/dummy input detected."}), 400
 
         # Convert to DataFrame and preprocess
         df = pd.DataFrame([features])

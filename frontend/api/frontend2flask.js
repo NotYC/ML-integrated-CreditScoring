@@ -46,13 +46,26 @@ export async function sendDataToBackend(formData) {
       body: JSON.stringify(payload)
     });
 
+    // Check if the response is ok (status in the range 200-299)
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error('Error response from backend:', errorData);
+      throw { response: { data: errorData } };
+    }
+
     const result = await res.json();
     console.log('Response from backend:', result);
 
     return result;
   } catch (err) {
     console.error('Error calling backend:', err);
-    return { score: null, rating: "Error fetching score" };
+
+    if (err.response && err.response.data) {
+      throw err; // Re-throw to be handled by the component
+    }
+
+    throw new Error("Network error or backend is not responding");
   }
 }
+
 
