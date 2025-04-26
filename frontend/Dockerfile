@@ -1,6 +1,24 @@
-FROM node:18-alpine
+# Build stage
+FROM node:20 AS build
+
 WORKDIR /app
-COPY . .
+
+COPY package.json package-lock.json ./
 RUN npm install
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
+
+COPY . .
+
+# Build the app
+RUN npm run build
+
+# Production stage
+FROM nginx:stable-alpine
+
+# Copy build files from previous stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port 80 inside container
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

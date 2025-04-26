@@ -1,6 +1,18 @@
-FROM python:3.10-slim
+# Use official Python base image
+FROM python:3.11-slim
+
+# Set working directory
 WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy source code
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
-EXPOSE 8000
+
+# Expose flask port inside container
+EXPOSE 5003
+
+# Command to run app
 CMD ["python", "app.py"]

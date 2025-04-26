@@ -1,6 +1,13 @@
-FROM node:18-alpine
+FROM node:20
+
 WORKDIR /app
-COPY . .
+
+COPY package.json package-lock.json ./
 RUN npm install
-EXPOSE 5000
+
+COPY . .
+
+# Expose backend port (5001)
+EXPOSE 5001
+
 CMD ["node", "index.js"]
