@@ -1,9 +1,8 @@
-flask
 pandas
 scikit-learn
 xgboost
 pymongo
 joblib
 numpy
-flask_cors
-python-dotenv
+Flask
+flask-cors

@@ -1,13 +1,13 @@
-FROM node:18
+FROM node:20
 
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+# Expose backend port (5001)
+EXPOSE 5001
 
 CMD ["node", "index.js"]

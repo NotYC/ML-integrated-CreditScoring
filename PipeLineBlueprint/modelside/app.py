@@ -1,27 +1,18 @@
 from flask import Flask, request, jsonify
 import joblib
-import pymongo
 from flask_cors import CORS
 import pandas as pd
-from datetime import datetime  # Optional: to store timestamp
-from dotenv import load_dotenv
-import os
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning, message=".*WARNING: .*If you are loading a serialized model.*")
+
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS so Express or any frontend can access it
 
-load_dotenv()
 
 # Load model and preprocessor
-preprocessor = joblib.load("model/preprocessor.pkl")
-model = joblib.load("model/stacked_model.pkl")
+preprocessor = joblib.load("model/preprocessor1.pkl")
+model = joblib.load("model/stacked_model1.pkl")
 
-# Connect to MongoDB
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client["credit_app"]
-collection = db["predictions"]
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -44,18 +35,6 @@ def predict():
             'Length_of_Credit_History': float(data['credit_history']),
             'Bankruptcies': int(data['bankruptcies'])
         }
-                # Sanity check for all-zero or dummy inputs
-        if all([
-            features['Income'] == 0,
-            features['Number_of_Dependents'] == 0,
-            features['Credit_Utilization_Ratio'] == 0,
-            features['Missed_Payments_90days'] == 0,
-            features['Total_Credit_Accounts'] == 0,
-            features['Debt_to_Income_Ratio'] == 0,
-            features['Length_of_Credit_History'] == 0,
-            features['Bankruptcies'] == 0,
-        ]):
-            return jsonify({"error": "Invalid input: all-zero or empty/dummy input detected."}), 400
 
         # Convert to DataFrame and preprocess
         df = pd.DataFrame([features])
@@ -86,5 +65,4 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    print(os.getenv("flask_server"))
-    app.run(host=os.getenv("flask_server"), port=os.getenv("flask_port"))
+    app.run(host="0.0.0.0", port=5003, debug=True)
