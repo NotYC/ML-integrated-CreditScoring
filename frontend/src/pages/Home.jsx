@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import { sendDataToBackend } from "../../api/frontend2flask.js";
-import { sendLogtoBackend} from "../../api/credithistory.js"
-
+import { sendLogtoBackend } from "../../api/credithistory.js";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -31,20 +30,57 @@ const Home = () => {
   };
 
   const handleGenerate = async () => {
+    // Asset Info Validation: Check if all fields are zero
+    const assetInfoFields = [
+      'income', 'dependents', 'credit_util', 'missed_payments',
+      'total_accounts', 'dti', 'credit_history', 'bankruptcies'
+    ];
+
+    const allFieldsZero = assetInfoFields.every(field => formData[field] === '0' || formData[field] === 0);
+
+    if (allFieldsZero) {
+      alert('Asset information seems incorrect. Please provide valid values.');
+      setScore(300);
+      setRating('Poor');
+      return;
+    }
+
     const { name, work_experience, ...payload } = formData;
     console.log("Sending to backend:", payload);
     const logEmail = Cookies.get('email');
-    const result = await sendDataToBackend(payload);
-    if (result?.score) {
-      setScore(score => result.score);
-      setRating(result.rating);
-      const { name, work_experience,age,education,employment_status,marital_status,profession, ...payload } = formData;
-      const logResult = await sendLogtoBackend(payload,result.score,rating,logEmail);
-      if (logResult.success) {
-        console.log("Log saved successfully:", logResult.message);
-      } else {
-        console.error("Error saving log:", logResult.message);
+    
+    try {
+      const result = await sendDataToBackend(payload);
+      
+      if (result?.score) {
+        setScore(result.score);
+        setRating(result.rating);
+
+        const { name, work_experience, age, education, employment_status, marital_status, profession, ...logPayload } = formData;
+        const logResult = await sendLogtoBackend(logPayload, result.score, result.rating, logEmail);
+        if (logResult.success) {
+          console.log("Log saved successfully:", logResult.message);
+        } else {
+          console.error("Error saving log:", logResult.message);
+        }
       }
+    } catch (error) {
+      console.error("Error:", error);
+      
+      // Handle the error response from backend
+      if (error.response && error.response.data) {
+        // Extract error message from response data
+        const errorMsg = error.response.data.error || "An error occurred";
+        alert(errorMsg);
+      } else if (error.message) {
+        alert(`Error: ${error.message}`);
+      } else {
+        alert("An unexpected error occurred");
+      }
+      
+      // Reset score and rating to default values
+      setScore(300);
+      setRating('Poor');
     }
   };
 
@@ -74,7 +110,7 @@ const Home = () => {
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           />
           <input
-            type = "number"
+            type="number"
             name="age"
             value={formData.age}
             onChange={handleChange}
@@ -112,19 +148,19 @@ const Home = () => {
             onChange={handleChange}
             placeholder="Enter your Education Level"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
-            >
+          >
             <option value="">Select Education level</option>
             <option value="High School">High School</option>
             <option value="Bachelors">Bachelor</option>
             <option value="Masters">Master</option>
             <option value="PhD">PhD</option>
-          </select>     
+          </select>
           <select
-              name="employment_status"
-              value={formData.employment_status}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
-            >
+            name="employment_status"
+            value={formData.employment_status}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+          >
             <option value="">Select Employment Status</option>
             <option value="Unemployed">Unemployed</option>
             <option value="Self-Employed">Self-Employed</option>
@@ -145,7 +181,7 @@ const Home = () => {
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Asset Info</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
+          {[ 
             { name: 'income', placeholder: 'Enter your Income' },
             { name: 'dependents', placeholder: 'Number of Dependents' },
             { name: 'credit_util', placeholder: 'Credit Utilization Ratio' },
@@ -203,15 +239,15 @@ const Home = () => {
                 initial={{ rotate: -90 }}
                 animate={{
                   rotate: -90 + ((score - 300) / 550) * 180,
-                  transition: { 
-                    type: 'spring', 
+                  transition: {
+                    type: 'spring',
                     damping: 15,
                     stiffness: 120,
                     mass: 0.5
                   }
                 }}
                 transformOrigin="100 100"
-                style={{ 
+                style={{
                   originX: '100px',
                   originY: '100px'
                 }}
@@ -222,7 +258,7 @@ const Home = () => {
               <span>850</span>
             </div>
           </div>
-          <motion.div 
+          <motion.div
             className="text-center mt-2"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
@@ -231,10 +267,10 @@ const Home = () => {
             <div className="text-5xl font-bold text-gray-900">{score}</div>
             <div className={`text-xl font-semibold mt-2 px-4 py-1 rounded-full inline-block ${
               rating === "Exceptional" ? "bg-green-100 text-green-800" :
-              rating === "Very Good"   ? "bg-green-100 text-green-700" :
-              rating === "Good"        ? "bg-green-100 text-green-600" :
-              rating === "Fair"        ? "bg-yellow-100 text-yellow-800" :
-                                        "bg-red-100 text-red-800"
+              rating === "Very Good" ? "bg-green-100 text-green-700" :
+              rating === "Good" ? "bg-green-100 text-green-600" :
+              rating === "Fair" ? "bg-yellow-100 text-yellow-800" :
+              "bg-red-100 text-red-800"
             }`}>
               {rating}
             </div>
@@ -245,7 +281,7 @@ const Home = () => {
         <div className="flex-1 bg-white rounded-xl shadow-lg p-6">
           <h3 className="font-bold text-lg mb-3">Credit Score Ranges</h3>
           <div className="space-y-3">
-            {[
+            {[ 
               { range: '800-850', label: 'Exceptional', color: 'bg-green-600' },
               { range: '740-799', label: 'Very Good', color: 'bg-green-500' },
               { range: '670-739', label: 'Good', color: 'bg-green-400' },
@@ -266,7 +302,7 @@ const Home = () => {
               <li>• Keep credit utilization below 30%</li>
               <li>• Maintain a mix of credit types</li>
               <li>• Limit new credit applications</li>
-              <li>• Keep old credit accounts open </li>
+              <li>• Keep old credit accounts open</li>
             </ul>
           </div>
         </div>
