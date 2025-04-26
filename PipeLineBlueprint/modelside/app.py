@@ -10,8 +10,8 @@ CORS(app)  # Enable CORS so Express or any frontend can access it
 
 
 # Load model and preprocessor
-preprocessor = joblib.load("model/preprocessor1.pkl")
-model = joblib.load("model/stacked_model1.pkl")
+preprocessor = joblib.load("model/preprocessor.pkl")
+model = joblib.load("model/stacked_model.pkl")
 
 
 @app.route("/predict", methods=["POST"])
