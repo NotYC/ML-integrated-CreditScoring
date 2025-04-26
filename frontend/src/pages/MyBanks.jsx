@@ -1,5 +1,5 @@
 import React from 'react';
-import CreditCard from '../components/CreditCard'; 
+import CreditCard from '../components/creditcard'; 
 // Adjust path if needed
 
 
