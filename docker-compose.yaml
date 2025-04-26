@@ -1,31 +1,33 @@
-version: "3.9"
+version: '3.9'
 
 services:
+  flask:
+    build:
+      context: ./PipeLineBlueprint/modelside
+    container_name: flask-container
+    ports:
+      - "5003:5003"
+    restart: unless-stopped
+
   frontend:
     build:
       context: ./frontend
+    container_name: frontend-container
     ports:
-      - "3000:3000"
-    container_name: creditscore_frontend
-    restart: unless-stopped
+      - "5002:80"
     depends_on:
-      - backend
-      - ml_model
+      - flask
+    restart: unless-stopped
 
   backend:
     build:
       context: ./authentication_end
+    container_name: backend-container
     ports:
-      - "5000:5000"
-    container_name: creditscore_backend
-    restart: unless-stopped
+      - "5001:5001"
+    env_file:
+      - ./authentication_end/.env
     depends_on:
-      - ml_model
-
-  ml_model:
-    build:
-      context: ./PipeLine Blueprint/modelside
-    ports:
-      - "8000:8000"
-    container_name: creditscore_ml_model
+      - frontend
+      - flask
     restart: unless-stopped
