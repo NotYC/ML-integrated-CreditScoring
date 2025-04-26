@@ -24,7 +24,7 @@ services:
 
   ml_model:
     build:
-      context: ./PipeLine Blueprint/model side
+      context: ./PipeLine Blueprint/modelside
     ports:
       - "8000:8000"
     container_name: creditscore_ml_model
