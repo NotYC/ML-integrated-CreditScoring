@@ -71,3 +71,21 @@ It should be working now
 Dont do any changes in main branch now
 
 If you want to change to before docker integration , make branch from "credit history chart" of sarab commit.
+
+
+### Docker
+
+Individual Containers
+flask 
+2.  docker run -d --name flask-container -p 5003:5003 my-flask
+1. docker build -t my-flask .\PipeLineBlueprint\modelside\   
+
+frontend:
+2.docker run -d --name frontend-container -p 5002:80 my-frontend
+1. docker build -t my-frontend .\frontend\ 
+
+backend:
+2.  docker run -d --name backend-container --env-file ./authentication_end/.env -p 5001:5001 my-backend
+1. docker build -t my-backend .\authentication_end
+
+Once everything is working properly then only can we move to the next step that is docker-compose up --build
