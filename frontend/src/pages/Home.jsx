@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { sendDataToBackend } from "../../api/frontend2flask.js";
 import { sendLogtoBackend } from "../../api/credithistory.js";
@@ -26,6 +25,8 @@ const Home = () => {
   const [errors, setErrors] = useState({});
   const [score, setScore] = useState(300);
   const [rating, setRating] = useState('Poor');
+  const [animatedScore, setAnimatedScore] = useState(300);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -121,6 +122,39 @@ const Home = () => {
     setScore(300);
     setRating('Poor');
   };
+
+  // Calculate needle rotation based on score
+  const calculateRotation = (score) => {
+    // Map the score (300-850) to degrees (-90 to 90)
+    return -90 + ((score - 300) / 550) * 180;
+  };
+  
+  // Animate the score when it changes
+  useEffect(() => {
+    setIsAnimating(true);
+    
+    // Start from current animated score (or 300 if it's below)
+    const startValue = animatedScore < 300 ? 300 : animatedScore;
+    const duration = 1500; // 1.5 seconds
+    const framesPerSecond = 60;
+    const totalFrames = duration / 1000 * framesPerSecond;
+    const increment = (score - startValue) / totalFrames;
+    
+    let currentFrame = 0;
+    const timer = setInterval(() => {
+      currentFrame++;
+      
+      if (currentFrame <= totalFrames) {
+        setAnimatedScore(Math.round(startValue + increment * currentFrame));
+      } else {
+        setAnimatedScore(score);
+        setIsAnimating(false);
+        clearInterval(timer);
+      }
+    }, 1000 / framesPerSecond);
+    
+    return () => clearInterval(timer);
+  }, [score]);
 
   return (
     <main className="flex-1 p-8 space-y-8 bg-white text-black">
@@ -264,35 +298,32 @@ const Home = () => {
                 </linearGradient>
               </defs>
               <circle cx="100" cy="100" r="6" fill="#1f2937" />
-              <motion.path
-                d="M 100 100 L 100 30"
-                stroke="#1f2937"
-                strokeWidth="3"
-                initial={{ rotate: -90 }}
-                animate={{
-                  rotate: -90 + ((score - 300) / 550) * 180,
-                  transition: {
-                    type: 'spring',
-                    damping: 15,
-                    stiffness: 120,
-                    mass: 0.5
-                  }
+              <g 
+                style={{ 
+                  transformOrigin: '100px 100px', 
+                  transform: `rotate(${calculateRotation(animatedScore)}deg)`,
+                  transition: isAnimating ? 'transform 0.05s ease-out' : 'none'
                 }}
-                transformOrigin="100 100"
-              />
+              >
+                <path
+                  d="M 100 100 L 100 30"
+                  stroke="#1f2937"
+                  strokeWidth="3"
+                />
+              </g>
             </svg>
             <div className="absolute bottom-0 left-0 right-0 flex justify-between px-6 text-xs text-gray-600">
               <span>300</span>
               <span>850</span>
             </div>
           </div>
-          <motion.div
+          <div 
             className="text-center mt-2"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring' }}
+            style={{
+              animation: isAnimating ? 'scoreUpdate 0.5s ease-in-out' : 'none'
+            }}
           >
-            <div className="text-5xl font-bold text-gray-900">{score}</div>
+            <div className="text-5xl font-bold text-gray-900">{animatedScore}</div>
             <div className={`text-xl font-semibold mt-2 px-4 py-1 rounded-full inline-block ${
               rating === "Exceptional" ? "bg-green-100 text-green-800" :
               rating === "Very Good" ? "bg-green-100 text-green-700" :
@@ -302,7 +333,7 @@ const Home = () => {
             }`}>
               {rating}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Tips Card */}
@@ -351,6 +382,15 @@ const Home = () => {
           Calculate Score
         </button>
       </div>
+
+      {/* CSS Animation Keyframes */}
+      <style jsx>{`
+        @keyframes scoreUpdate {
+          0% { transform: scale(0.95); }
+          50% { transform: scale(1.05); }
+          100% { transform: scale(1); }
+        }
+      `}</style>
     </main>
   );
 };

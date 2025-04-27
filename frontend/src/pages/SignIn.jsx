@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import dashboard from '../assets/dashboard.png';
+import dashboard from '../assets/dashboard.jpg';
 const backS = import.meta.env.VITE_BACKEND_SERVER;
 const backP = import.meta.env.VITE_BACK_PORT;
 

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LinkBank.css';
-import dashboard from '../assets/dashboard.png';
+import dashboard from '../assets/dashboard.jpg';
 
 const LinkBank = () => {
   const [showModal, setShowModal] = useState(false);
