@@ -11,6 +11,7 @@ const Home = () => {
     marital_status: '',
     profession: '',
     education: '',
+    employment_status: '',
     work_experience: '',
     income: '',
     dependents: '',
@@ -22,42 +23,59 @@ const Home = () => {
     bankruptcies: ''
   });
 
+  const [errors, setErrors] = useState({});
   const [score, setScore] = useState(300);
   const [rating, setRating] = useState('Poor');
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setErrors(prev => ({ ...prev, [e.target.name]: '' })); // Clear error when user edits
+  };
+
+  const validateFields = () => {
+    const newErrors = {};
+
+    const numericFields = {
+      income: 'Income',
+      dependents: 'Number of Dependents',
+      credit_util: 'Credit Utilization Ratio',
+      missed_payments: 'Missed Payments',
+      total_accounts: 'Total Credit Accounts',
+      dti: 'Debt-to-Income Ratio',
+      credit_history: 'Credit History Length',
+      bankruptcies: 'Bankruptcies'
+    };
+
+    for (const field in numericFields) {
+      const value = formData[field];
+      if (value === '' || isNaN(Number(value))) {
+        newErrors[field] = `${numericFields[field]} must be a valid number.`;
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
   const handleGenerate = async () => {
-    // Asset Info Validation: Check if all fields are zero
-    const assetInfoFields = [
-      'income', 'dependents', 'credit_util', 'missed_payments',
-      'total_accounts', 'dti', 'credit_history', 'bankruptcies'
-    ];
-
-    const allFieldsZero = assetInfoFields.every(field => formData[field] === '0' || formData[field] === 0);
-
-    if (allFieldsZero) {
-      alert('Asset information seems incorrect. Please provide valid values.');
-      setScore(300);
-      setRating('Poor');
+    if (!validateFields()) {
       return;
     }
 
     const { name, work_experience, ...payload } = formData;
     console.log("Sending to backend:", payload);
     const logEmail = Cookies.get('email');
-    
+
     try {
       const result = await sendDataToBackend(payload);
-      
+
       if (result?.score) {
         setScore(result.score);
         setRating(result.rating);
 
         const { name, work_experience, age, education, employment_status, marital_status, profession, ...logPayload } = formData;
         const logResult = await sendLogtoBackend(logPayload, result.score, result.rating, logEmail);
+
         if (logResult.success) {
           console.log("Log saved successfully:", logResult.message);
         } else {
@@ -66,10 +84,8 @@ const Home = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      
-      // Handle the error response from backend
+
       if (error.response && error.response.data) {
-        // Extract error message from response data
         const errorMsg = error.response.data.error || "An error occurred";
         alert(errorMsg);
       } else if (error.message) {
@@ -77,8 +93,7 @@ const Home = () => {
       } else {
         alert("An unexpected error occurred");
       }
-      
-      // Reset score and rating to default values
+
       setScore(300);
       setRating('Poor');
     }
@@ -86,10 +101,23 @@ const Home = () => {
 
   const resetForm = () => {
     setFormData({
-      name: '', age: '', marital_status: '', profession: '', education: '', work_experience: '',
-      income: '', dependents: '', credit_util: '', missed_payments: '',
-      total_accounts: '', dti: '', credit_history: '', bankruptcies: ''
+      name: '',
+      age: '',
+      marital_status: '',
+      profession: '',
+      education: '',
+      employment_status: '',
+      work_experience: '',
+      income: '',
+      dependents: '',
+      credit_util: '',
+      missed_payments: '',
+      total_accounts: '',
+      dti: '',
+      credit_history: '',
+      bankruptcies: ''
     });
+    setErrors({});
     setScore(300);
     setRating('Poor');
   };
@@ -97,7 +125,7 @@ const Home = () => {
   return (
     <main className="flex-1 p-8 space-y-8 bg-white text-black">
 
-      {/* Personal Information Section */}
+      {/* Personal Info Section */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Personal Info</h2>
         <div className="space-y-4">
@@ -131,7 +159,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Professional Information Section */}
+      {/* Professional Info Section */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Professional Info</h2>
         <div className="space-y-4">
@@ -146,7 +174,6 @@ const Home = () => {
             name="education"
             value={formData.education}
             onChange={handleChange}
-            placeholder="Enter your Education Level"
             className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Education level</option>
@@ -177,11 +204,11 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Asset Information Section */}
+      {/* Asset Info Section */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Asset Info</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[ 
+          {[
             { name: 'income', placeholder: 'Enter your Income' },
             { name: 'dependents', placeholder: 'Number of Dependents' },
             { name: 'credit_util', placeholder: 'Credit Utilization Ratio' },
@@ -191,23 +218,29 @@ const Home = () => {
             { name: 'credit_history', placeholder: 'Length of Credit History' },
             { name: 'bankruptcies', placeholder: 'Bankruptcies' },
           ].map((field) => (
-            <input
-              key={field.name}
-              name={field.name}
-              value={formData[field.name]}
-              onChange={handleChange}
-              placeholder={field.placeholder}
-              className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
-            />
+            <div key={field.name} className="flex flex-col">
+              <input
+                name={field.name}
+                value={formData[field.name]}
+                onChange={handleChange}
+                placeholder={field.placeholder}
+                className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+              />
+              {errors[field.name] && (
+                <span className="text-red-500 text-sm mt-1">{errors[field.name]}</span>
+              )}
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Credit Score Display Section */}
+      {/* Credit Score and Actions Section */}
       <div className="flex flex-col md:flex-row gap-6 items-stretch">
+
         {/* Speedometer Card */}
         <div className="flex-1 bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
           <div className="relative w-full max-w-xs h-52 mb-2">
+            {/* SVG Speedometer */}
             <svg className="w-full h-full" viewBox="0 0 200 120">
               <path
                 d="M 20 100 A 80 80 0 0 1 180 100"
@@ -235,7 +268,6 @@ const Home = () => {
                 d="M 100 100 L 100 30"
                 stroke="#1f2937"
                 strokeWidth="3"
-                strokeLinecap="butt"
                 initial={{ rotate: -90 }}
                 animate={{
                   rotate: -90 + ((score - 300) / 550) * 180,
@@ -247,10 +279,6 @@ const Home = () => {
                   }
                 }}
                 transformOrigin="100 100"
-                style={{
-                  originX: '100px',
-                  originY: '100px'
-                }}
               />
             </svg>
             <div className="absolute bottom-0 left-0 right-0 flex justify-between px-6 text-xs text-gray-600">
@@ -277,24 +305,24 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Credit Information Panel */}
+        {/* Tips Card */}
         <div className="flex-1 bg-white rounded-xl shadow-lg p-6">
           <h3 className="font-bold text-lg mb-3">Credit Score Ranges</h3>
-          <div className="space-y-3">
-            {[ 
-              { range: '800-850', label: 'Exceptional', color: 'bg-green-600' },
-              { range: '740-799', label: 'Very Good', color: 'bg-green-500' },
-              { range: '670-739', label: 'Good', color: 'bg-green-400' },
-              { range: '580-669', label: 'Fair', color: 'bg-yellow-500' },
-              { range: '300-579', label: 'Poor', color: 'bg-red-500' },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center">
-                <div className={`w-3 h-3 rounded-full ${item.color} mr-2`}></div>
-                <span className="font-medium">{item.range}:</span>
-                <span className="ml-2 text-gray-700">{item.label}</span>
-              </div>
-            ))}
-          </div>
+          {/* Score Range Info */}
+          {[
+            { range: '800-850', label: 'Exceptional', color: 'bg-green-600' },
+            { range: '740-799', label: 'Very Good', color: 'bg-green-500' },
+            { range: '670-739', label: 'Good', color: 'bg-green-400' },
+            { range: '580-669', label: 'Fair', color: 'bg-yellow-500' },
+            { range: '300-579', label: 'Poor', color: 'bg-red-500' },
+          ].map(item => (
+            <div key={item.label} className="flex items-center">
+              <div className={`w-3 h-3 rounded-full ${item.color} mr-2`}></div>
+              <span className="font-medium">{item.range}:</span>
+              <span className="ml-2 text-gray-700">{item.label}</span>
+            </div>
+          ))}
+          {/* Tips Section */}
           <div className="mt-6 pt-4 border-t border-gray-200">
             <h4 className="font-semibold mb-2">Improvement Tips</h4>
             <ul className="text-sm space-y-1 text-gray-600">
@@ -308,10 +336,10 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Action Buttons */}
+      {/* Buttons */}
       <div className="flex flex-col gap-4 mt-6 md:flex-row">
         <button
-          className="bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-lg text-white transition-colors duration-200"
+          className="bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-lg text-black transition-colors duration-200"
           onClick={resetForm}
         >
           Reset Form
