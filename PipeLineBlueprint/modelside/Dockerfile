@@ -7,8 +7,11 @@ WORKDIR /app
 # Install dependencies
 COPY requirements.txt .
 
-RUN pip install --default-timeout=10000 -r requirements.txt
+# Upgrade pip first to avoid hash/checksum issues
+RUN pip install --upgrade pip
 
+# Install packages without cache
+RUN pip install --default-timeout=10000 --no-cache-dir -r requirements.txt
 
 # Copy source code
 COPY . .
