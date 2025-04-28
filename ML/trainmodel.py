@@ -39,8 +39,8 @@ def calculate_credit_score(row):
         - (row['Missed_Payments_90days'] * 80)     # missed payments seriously bad
         + (row['Total_Credit_Accounts'] * 15)      # more accounts = slightly better
         - (row['Debt_to_Income_Ratio'] * 150)      # debt burden bad
-        - (row['Bankruptcies'] * 100)               # bankruptcies very bad
-        - (row['Number_of_Dependents'] * 3)        # more dependents slightly bad
+        - (row['Bankruptcies'] * 100)               # banktcies very bad
+        - (row['Number_of_Dependents'] * 3)        # more dependents slightly badrup
     )
 
 # Apply the function to create the 'Credit_Score' target
