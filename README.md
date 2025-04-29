@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/logo.png" alt="Logo" width="250" height="250">
   </a>
 
   <h3 align="center">KYCS</h3>
@@ -35,8 +35,33 @@
 
 <br />
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#ml-integrated-credit-scoring-system">About the Project</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#tech-stack">Tech Stack</a></li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li>
+      <a href="#setup">Setup</a>
+      <ul>
+        <li><a href="#backend">Backend</a></li>
+        <li><a href="#flask">Flask</a></li>
+        <li><a href="#instructions">Instructions</a></li>
+        <li><a href="#running-docker">Running Docker</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
+
+
+<br />
+
 "# Project Initiated on 8 Feb 2025" 
-# ML Integrated Credit Scoring System
+
+
+## ML Integrated Credit Scoring System
 
 Traditional credit scoring methods often rely on rigid, rule-based systems that may not accurately assess the creditworthiness of diverse individuals, particularly those with limited financial history. Such systems can lead to biased decisions, inefficiencies, and missed opportunities for financial inclusion. To address these challenges, this project proposes the development of a Machine Learning Integrated Credit Scoring System that dynamically analyzes a broad range of financial and demographic factors to generate more accurate, fair, and explainable credit scores.
 
@@ -44,15 +69,70 @@ The proposed system is a machine learning-driven solution designed to efficientl
 
 This solution integrates Linear Regression and XGBoost machine learning models within a web application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js), combining the predictive power of machine learning with a seamless user experience. Through this approach, the system aims to enhance the precision of credit risk assessment, reduce manual errors, and support broader, more inclusive financial decision-making.
 
-<h2>📷 Dashboard Preview</h2>
+<h2>Preview</h2>
+
+<br />
+
 <p align="center">
-  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/dashboard.jpg" alt="Dashboard Screenshot" height="1000" width="700"/>
+  <h3> Sign-up<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/login-successfull.jpg" alt="sign-up" width="700"/>
+</p>
+
+<br />
+
+<p align="center">
+  <h3>Link your Bank Account<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/about-us-team.jpg" alt="link-bank" width="700"/>
+</p>
+
+
+<br />
+  
+<p align="center">
+  <h3>Dashboard<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/home-page-fields.jpg" alt="Dashboard" width="700"/>
+</p>
+
+<br />
+
+<p align="center">
+  <h3> My Banks<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/bank-accounts.jpg" alt="My banks" width="700"/>
+</p>
+
+<br />
+
+<p align="center">
+  <h3> Credit History<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/credit-chart.jpg" alt="credit history" width="700"/>
+</p>
+
+<br />
+
+<p align="center">
+  <h3>About Us<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/about-us-team.jpg" alt="about us" width="700"/>
+</p>
+
+<br />
+
+
+<p align="center">
+  <h3>Help<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/help-page.jpg" alt="help" width="700"/>
 </p>
 
 
 <br />
 
-## ✨ Features
+<p align="center">
+  <h3>Profile<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/about-us-team.jpg" alt="profile" width="700"/>
+</p>
+
+<br />
+    
+## Features
 
 ### 🧾 Comprehensive User Input Form
 A well-structured, multi-section form that collects detailed:
@@ -98,25 +178,51 @@ Integrated ML models to predict creditworthiness:
 ## Tech Stack
 
 - **Frontend**:
-  - **React.js**: A JavaScript library for building user interfaces.
-  - **Material-UI**: A React component library for building modern, responsive designs.
+
+| **Technology** | **Description** |
+|----------------|-----------------|
+| [![React](https://img.shields.io/badge/React.js-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org) | A JavaScript library for building user interfaces. |
+| [![Material UI](https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com) | A React component library for building modern, responsive designs. |
+
+<br />
+
 - **Backend**:
-  - **Node.js**: JavaScript runtime for building the server.
-  - **Express.js**: A web framework for Node.js to handle backend routing.
-  - **Flask**: For serving the machine learning models as APIs (if running models in a separate service).
+
+| **Technology** | **Description** |
+|----------------|-----------------|
+| [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org) | JavaScript runtime for building the server. |
+| [![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com) | A web framework for Node.js to handle backend routing. |
+| [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com) | For serving machine learning models as APIs (if used in a separate service). |
+
+<br />
+
+
 - **Machine Learning**:
-  - **XGBoost**: A scalable machine learning algorithm used for gradient boosting.
-  - **Linear Regression**: A basic algorithm used to predict the credit score.
+
+| **Technology** | **Description** |
+|----------------|-----------------|
+| [![XGBoost](https://img.shields.io/badge/XGBoost-BE0029?style=for-the-badge&logo=python&logoColor=white)](https://xgboost.ai) | A scalable machine learning algorithm used for gradient boosting. |
+| [![Linear Regression](https://img.shields.io/badge/Linear%20Regression-00599C?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/stable/modules/linear_model.html#linear-regression) | A basic algorithm used to predict the credit score. |
+
+<br />
+
 - **Database**:
-  - **MongoDB**: A NoSQL database for storing user information and predicted credit scores.
+
+| **Technology** | **Description** |
+|----------------|-----------------|
+| [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com) | A NoSQL database for storing user information and predicted credit scores. |
+
+---
 
 ## Prerequisites
 
-- Node.js
-- MongoDB Compass
-- Python 3.x
-- Pip (for Python dependencies)
-- NPM  for managing JavaScript dependencies
+| **Technology** | **Description** |
+|----------------|-----------------|
+| [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en) | JavaScript runtime environment for executing server-side code. |
+| [![MongoDB Compass](https://img.shields.io/badge/MongoDB%20Compass-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/products/tools/compass) | GUI for MongoDB to visualize and manage your databases. |
+| [![Python 3.x](https://img.shields.io/badge/Python%203.x-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/) | High-level programming language used for backend logic and machine learning. |
+| [![pip](https://img.shields.io/badge/pip-3775A9?style=for-the-badge&logo=pypi&logoColor=white)](https://pip.pypa.io/en/stable/installation/) | Python package installer for managing dependencies. |
+| [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) | Node.js package manager for managing JavaScript dependencies. |
 
 ## Setup
 
