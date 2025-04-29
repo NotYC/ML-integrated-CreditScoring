@@ -69,20 +69,24 @@ The proposed system is a machine learning-driven solution designed to efficientl
 
 This solution integrates Linear Regression and XGBoost machine learning models within a web application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js), combining the predictive power of machine learning with a seamless user experience. Through this approach, the system aims to enhance the precision of credit risk assessment, reduce manual errors, and support broader, more inclusive financial decision-making.
 
+<br />
+
+---
+
 <h2>Preview</h2>
 
 <br />
 
 <p align="center">
-  <h3> Sign-up<h3>
-  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/login-successfull.jpg" alt="sign-up" width="700"/>
+  <h3> Sign-in<h3>
+  <img src="frontend/src/assets/sign-in-page.jpg" alt="sign-up" width="700"/>
 </p>
 
 <br />
 
 <p align="center">
   <h3>Link your Bank Account<h3>
-  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/about-us-team.jpg" alt="link-bank" width="700"/>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/link-your-bank.jpg" alt="link-bank" width="700"/>
 </p>
 
 
@@ -122,16 +126,8 @@ This solution integrates Linear Regression and XGBoost machine learning models w
   <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/help-page.jpg" alt="help" width="700"/>
 </p>
 
+---
 
-<br />
-
-<p align="center">
-  <h3>Profile<h3>
-  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/about-us-team.jpg" alt="profile" width="700"/>
-</p>
-
-<br />
-    
 ## Features
 
 ### 🧾 Comprehensive User Input Form
@@ -168,7 +164,7 @@ Integrated ML models to predict creditworthiness:
 ### 🔧 Jenkins CI/CD Integration
 - **Automated build and deployment** pipeline via **Jenkins**.
 - Each code push triggers:
-  - Linting and testing
+  - Linking and testing
   - Docker image creation
   - Containerized deployment
 - Streamlines continuous integration and delivery in production-like environments.
@@ -212,9 +208,12 @@ Integrated ML models to predict creditworthiness:
 |----------------|-----------------|
 | [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com) | A NoSQL database for storing user information and predicted credit scores. |
 
+<br />
+
 ---
 
 ## Prerequisites
+
 
 | **Technology** | **Description** |
 |----------------|-----------------|
@@ -224,6 +223,12 @@ Integrated ML models to predict creditworthiness:
 | [![pip](https://img.shields.io/badge/pip-3775A9?style=for-the-badge&logo=pypi&logoColor=white)](https://pip.pypa.io/en/stable/installation/) | Python package installer for managing dependencies. |
 | [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) | Node.js package manager for managing JavaScript dependencies. |
 
+
+<br />
+
+---
+
+
 ## Setup
 
 ### Backend (Node.js + Express)
@@ -232,14 +237,24 @@ Integrated ML models to predict creditworthiness:
    ```bash
    git clone https://github.com/yourusername/ml-integrated-credit-scoring.git
    cd ml-integrated-credit-scoring
+2. Install Dependencies:
+   ```bash
+   cd authentication_end
+   npm install
+
+
+
+
    
 ### ML Model (Flask)
 
-2. Run the Flask Applicatiom
+3. Run the Flask Applicatiom
    ```bash
    cd ml-integrated-credit-scoring/PipeLine Blueprint/model side
 
 
+
+<!-- 
 ### Instructions on how to run docker application of KYCS: 
 
 1.Pull the latest commit upto "deleted files" into your system while on main branch
@@ -259,29 +274,54 @@ It should be working now
 Dont do any changes in main branch now
 
 If you want to change to before docker integration , make branch from "credit history chart" of sarab commit.
+-->
 
+<br />
+
+---
 
 ### Docker
 
-Individual Containers
-flask 
-2.  docker run -d --name flask-container -p 5003:5003 my-flask
-1. docker build -t my-flask .\PipeLineBlueprint\modelside\   
+🐳 KYCS Docker Deployment Guide
+📦 Using Docker Compose (Recommended)
 
-frontend:
-2.docker run -d --name frontend-container -p 5002:80 my-frontend
-1. docker build -t my-frontend .\frontend\ 
+Docker Compose simplifies the process of managing multi-container applications.​
+<ol> <li><strong>Pull the Latest Changes:</strong> <pre><code>git checkout main git pull origin main</code></pre> </li> <li><strong>Navigate to the Project Root Directory:</strong> <pre><code>cd path/to/ml-integrated-credit-scoring</code></pre> </li> <li><strong>Build and Start the Containers:</strong> <pre><code>docker-compose up --build</code></pre> </li> <li><strong>Access the Frontend Container:</strong> <pre><code>docker exec -it creditscore_frontend bash</code></pre> </li> <li><strong>Open the Application in Your Browser:</strong> <pre><code>http://localhost:5174</code></pre> </li> <li><strong>Shut Down the Application:</strong> <pre><code>docker-compose down</code></pre> </li> </ol>
 
-backend:
-2.  docker run -d --name backend-container --env-file ./authentication_end/.env -p 5001:5001 my-backend
-1. docker build -t my-backend .\authentication_end
+⚠️ Important Notes
 
-Once everything is working properly then only can we move to the next step that is docker-compose up --build
+Branch Management: Avoid making changes directly to the main branch.​
+
+Reverting to Pre-Docker Setup: If you need to revert to the state before Docker integration, create a new branch from the credit history chart commit by Sarab.​
+
+Docker Installation: Ensure Docker is installed and running on your system. You can download it from <a href="https://www.docker.com/get-started" target="_blank">Docker's official website</a>.
+
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Agnishwar - agnishwar.raychaudhuri22@st.niituniversity.in
+
+Yuvraj Chawla - yuvraj.chawla22@st.niituniversity.in
+
+Sarab Bhatia - sarabjoth.bhatia22@st.niituniversity.in
+
+Samarth Tanay - samarth.tanay22@st.niituniversity.in
+
+Gautam Sharma - gautam.sharma22@st.niituniversity.in
+
+Project Link: https://github.com/NotYC/ML-integrated-CreditScoring
+
+<p align="right">(<a href="## About the project">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+<!-- These are just for references and havent been used yet -->
 
+
+<!-- 
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
@@ -312,4 +352,6 @@ Once everything is working properly then only can we move to the next step that 
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com  
+-->
+
