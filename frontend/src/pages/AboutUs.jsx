@@ -60,8 +60,8 @@ const AboutUs = () => {
             </div>
             
             <div className="bg-blue-100 p-4 rounded-md">
-              <h3 className="font-medium text-blue-600">Transaction History</h3>
-              <p className="text-gray-600 text-sm">View and search your complete financial history</p>
+              <h3 className="font-medium text-blue-600">Credit History</h3>
+              <p className="text-gray-600 text-sm">View and search your complete credit score history</p>
             </div>
           </div>
         </div>
