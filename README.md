@@ -44,16 +44,56 @@ The proposed system is a machine learning-driven solution designed to efficientl
 
 This solution integrates Linear Regression and XGBoost machine learning models within a web application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js), combining the predictive power of machine learning with a seamless user experience. Through this approach, the system aims to enhance the precision of credit risk assessment, reduce manual errors, and support broader, more inclusive financial decision-making.
 
+<h2>📷 Dashboard Preview</h2>
+<p align="center">
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/dashboard.jpg" alt="Dashboard Screenshot" height="1000" width="700"/>
+</p>
 
-## Features
 
-- **User Input Form**:A detailed and user-friendly form designed to collect comprehensive personal, professional, and financial information from users. The collected data serves as the primary input for the credit score prediction process. Sections are intuitively organized to ensure ease of use and completeness, enhancing the accuracy of the final prediction.
-- **Machine Learning Models**: This system incorporates multiple machine learning algorithms to ensure both accuracy and interpretability:
-  - **Linear Regression**: A straightforward and easily interpretable algorithm that establishes a relationship between user-provided inputs and the predicted credit score. Ideal for providing a baseline model and offering transparent insights into how different factors influence the score.
-  - **XGBoost**: An advanced and highly efficient gradient boosting algorithm known for its superior predictive performance. XGBoost enhances the system's accuracy by effectively handling complex patterns and interactions within the input data.
-- **Credit Score Visualization**: Real-time prediction results are visualized through a dynamic and animated dial gauge, offering an engaging user experience. The credit score is also categorized into intuitive ratings such as Poor, Fair, Good, and Excellent, helping users quickly understand their credit standing at a glance.
-- **MongoDB Integration**: TThe system seamlessly integrates with MongoDB, a NoSQL database, to store all credit score predictions along with associated user details. This ensures data persistence, enabling future references, audits, and advanced analytics.
-- **Responsive UI**: Built with a focus on user experience, the application features a modern, clean, and fully responsive user interface. The form is divided into clear sections including Personal Information, Professional Information, Asset Information, and a dedicated Credit Score Meter area, ensuring a smooth and organized data entry process across all devices (desktop, tablet, and mobile).
+<br />
+
+## ✨ Features
+
+### 🧾 Comprehensive User Input Form
+A well-structured, multi-section form that collects detailed:
+- **Personal Information** – Name, DOB, Gender, Nationality, etc.
+- **Professional Details** – Occupation, Annual Income, Employment type.
+- **Bank & Asset Details** – Account numbers, liabilities, TIN/Passport.
+
+### 🤖 Machine Learning-Based Credit Scoring
+Integrated ML models to predict creditworthiness:
+- **Linear Regression** – Interpretable model with a transparent scoring formula.
+- **XGBoost** – High-performance ensemble model for superior accuracy.
+
+### 📊 Real-Time Credit Score Visualization
+- **Interactive gauge meter** to display predicted credit score.
+- Categorizes scores into ranges: Poor, Fair, Good, Excellent.
+- Offers intuitive insights into financial credibility.
+
+### 🛢️ MongoDB-Powered Data Persistence
+- Secure storage of user submissions and predictions.
+- Enables future retrieval, analysis, and auditing.
+- Structured schema design for scalability.
+
+### 📱 Responsive Modern UI
+- Built using **React.js** and styled with **Material-UI**.
+- Optimized for **mobile, tablet, and desktop** screens.
+- Clean UX ensures seamless multi-step form navigation.
+
+### 🐳 Dockerized Deployment
+- Entire stack containerized using **Docker** and **Docker Compose**.
+- Isolated services: Backend, Frontend, ML Model API, MongoDB.
+- Enables effortless setup, testing, and scaling.
+
+### 🔧 Jenkins CI/CD Integration
+- **Automated build and deployment** pipeline via **Jenkins**.
+- Each code push triggers:
+  - Linting and testing
+  - Docker image creation
+  - Containerized deployment
+- Streamlines continuous integration and delivery in production-like environments.
+
+---
 
 ## Tech Stack
 
