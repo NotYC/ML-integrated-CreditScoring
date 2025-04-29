@@ -1,13 +1,20 @@
 <!-- SOCIAL LINKS -->
 
-[![Jira][jira-shield]][jira-url]
+<!-- SOCIAL LINKS -->
+<div align="center">
+  <a href="https://agnishwarraychaudhuri.atlassian.net/jira/software/projects/MICS/summary">
+    <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=white" alt="Jira Link" />
+  </a>
+</div>
 
+<br />
+<br />
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">KYCS</h3>
