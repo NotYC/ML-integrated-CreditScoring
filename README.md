@@ -35,8 +35,31 @@
 
 <br />
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#ml-integrated-credit-scoring-system">About the Project</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#tech-stack">Tech Stack</a></li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li>
+      <a href="#setup">Setup</a>
+      <ul>
+        <li><a href="#backend">Backend</a></li>
+        <li><a href="#flask">Flask</a></li>
+        <li><a href="#instructions">Instructions</a></li>
+        <li><a href="#running-docker">Running Docker</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
+
+
+<br />
+
 "# Project Initiated on 8 Feb 2025" 
-# ML Integrated Credit Scoring System
+##ML Integrated Credit Scoring System
 
 Traditional credit scoring methods often rely on rigid, rule-based systems that may not accurately assess the creditworthiness of diverse individuals, particularly those with limited financial history. Such systems can lead to biased decisions, inefficiencies, and missed opportunities for financial inclusion. To address these challenges, this project proposes the development of a Machine Learning Integrated Credit Scoring System that dynamically analyzes a broad range of financial and demographic factors to generate more accurate, fair, and explainable credit scores.
 
@@ -44,15 +67,17 @@ The proposed system is a machine learning-driven solution designed to efficientl
 
 This solution integrates Linear Regression and XGBoost machine learning models within a web application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js), combining the predictive power of machine learning with a seamless user experience. Through this approach, the system aims to enhance the precision of credit risk assessment, reduce manual errors, and support broader, more inclusive financial decision-making.
 
-<h2>📷 Dashboard Preview</h2>
+<h2>Preview</h2>
 <p align="center">
-  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/dashboard.jpg" alt="Dashboard Screenshot" height="1000" width="700"/>
+  <h3>Dashboard<h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/home-page-fields.jpg" alt="Dashboard Screenshot" width="700"/>
 </p>
-
-
 <br />
-
-## ✨ Features
+<p align="center">
+  <h3><h3>
+  <img src="https://github.com/NotYC/ML-integrated-CreditScoring/blob/main/frontend/src/assets/about-us-team.jpg" alt="about us" width="700"/>
+</p>
+##Features
 
 ### 🧾 Comprehensive User Input Form
 A well-structured, multi-section form that collects detailed:
