@@ -297,6 +297,26 @@ Reverting to Pre-Docker Setup: If you need to revert to the state before Docker 
 Docker Installation: Ensure Docker is installed and running on your system. You can download it from <a href="https://www.docker.com/get-started" target="_blank">Docker's official website</a>.
 
 
+
+
+<!-- CONTACT -->
+## Contact
+
+Agnishwar - agnishwar.raychaudhuri22@st.niituniversity.in
+
+Yuvraj Chawla - yuvraj.chawla22@st.niituniversity.in
+
+Sarab Bhatia - sarabjoth.bhatia22@st.niituniversity.in
+
+Samarth Tanay - samarth.tanay22@st.niituniversity.in
+
+Gautam Sharma - gautam.sharma22@st.niituniversity.in
+
+Project Link: https://github.com/NotYC/ML-integrated-CreditScoring
+
+<p align="right">(<a href="## About the project">back to top</a>)</p>
+
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- These are just for references and havent been used yet -->
 
