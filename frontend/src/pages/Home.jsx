@@ -30,13 +30,14 @@ const Home = () => {
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    setErrors(prev => ({ ...prev, [e.target.name]: '' })); // Clear error when user edits
+    setErrors(prev => ({ ...prev, [e.target.name]: '' }));
   };
 
   const validateFields = () => {
     const newErrors = {};
-
     const numericFields = {
+      age: 'Age',
+      work_experience: 'Work Experience',
       income: 'Income',
       dependents: 'Number of Dependents',
       credit_util: 'Credit Utilization Ratio',
@@ -51,20 +52,19 @@ const Home = () => {
       const value = formData[field];
       if (value === '' || isNaN(Number(value))) {
         newErrors[field] = `${numericFields[field]} must be a valid number.`;
+      } else if (Number(value) < 0) {
+        newErrors[field] = `Negative values not accepted.`;
       }
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleGenerate = async () => {
-    if (!validateFields()) {
-      return;
-    }
+    if (!validateFields()) return;
 
     const { name, work_experience, ...payload } = formData;
-    console.log("Sending to backend:", payload);
     const logEmail = Cookies.get('email');
 
     try {
@@ -87,8 +87,7 @@ const Home = () => {
       console.error("Error:", error);
 
       if (error.response && error.response.data) {
-        const errorMsg = error.response.data.error || "An error occurred";
-        alert(errorMsg);
+        alert(error.response.data.error || "An error occurred");
       } else if (error.message) {
         alert(`Error: ${error.message}`);
       } else {
@@ -123,27 +122,21 @@ const Home = () => {
     setRating('Poor');
   };
 
-  // Calculate needle rotation based on score
   const calculateRotation = (score) => {
-    // Map the score (300-850) to degrees (-90 to 90)
     return -90 + ((score - 300) / 550) * 180;
   };
-  
-  // Animate the score when it changes
+
   useEffect(() => {
     setIsAnimating(true);
-    
-    // Start from current animated score (or 300 if it's below)
     const startValue = animatedScore < 300 ? 300 : animatedScore;
-    const duration = 1500; // 1.5 seconds
+    const duration = 1500;
     const framesPerSecond = 60;
     const totalFrames = duration / 1000 * framesPerSecond;
     const increment = (score - startValue) / totalFrames;
-    
+
     let currentFrame = 0;
     const timer = setInterval(() => {
       currentFrame++;
-      
       if (currentFrame <= totalFrames) {
         setAnimatedScore(Math.round(startValue + increment * currentFrame));
       } else {
@@ -152,14 +145,13 @@ const Home = () => {
         clearInterval(timer);
       }
     }, 1000 / framesPerSecond);
-    
+
     return () => clearInterval(timer);
   }, [score]);
 
   return (
     <main className="flex-1 p-8 space-y-8 bg-white text-black">
-
-      {/* Personal Info Section */}
+      {/* Personal Info */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Personal Info</h2>
         <div className="space-y-4">
@@ -169,7 +161,7 @@ const Home = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Enter your Full Name"
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           />
           <input
             type="number"
@@ -177,23 +169,24 @@ const Home = () => {
             value={formData.age}
             onChange={handleChange}
             placeholder="Enter your Age"
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           />
+          {errors.age && <span className="text-red-500 text-sm">{errors.age}</span>}
           <select
             name="marital_status"
             value={formData.marital_status}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           >
             <option value="">Select Marital Status</option>
-            <option value="Single">Single </option>
+            <option value="Single">Single</option>
             <option value="Married">Married</option>
             <option value="Divorced">Divorced</option>
           </select>
         </div>
       </div>
 
-      {/* Professional Info Section */}
+      {/* Professional Info */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Professional Info</h2>
         <div className="space-y-4">
@@ -202,13 +195,13 @@ const Home = () => {
             value={formData.profession}
             onChange={handleChange}
             placeholder="Enter your Profession"
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           />
           <select
             name="education"
             value={formData.education}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           >
             <option value="">Select Education level</option>
             <option value="High School">High School</option>
@@ -220,7 +213,7 @@ const Home = () => {
             name="employment_status"
             value={formData.employment_status}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           >
             <option value="">Select Employment Status</option>
             <option value="Unemployed">Unemployed</option>
@@ -233,23 +226,24 @@ const Home = () => {
             value={formData.work_experience}
             onChange={handleChange}
             placeholder="Enter your Work Experience"
-            className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-lg"
           />
+          {errors.work_experience && <span className="text-red-500 text-sm">{errors.work_experience}</span>}
         </div>
       </div>
 
-      {/* Asset Info Section */}
+      {/* Asset Info */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="font-bold text-lg mb-4">Asset Info</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            { name: 'income', placeholder: 'Enter your Annual Income in USD' },
+            { name: 'income', placeholder: 'Annual Income (USD)' },
             { name: 'dependents', placeholder: 'Number of Dependents' },
             { name: 'credit_util', placeholder: 'Credit Utilization Ratio' },
             { name: 'missed_payments', placeholder: 'Missed Payments (90 days)' },
             { name: 'total_accounts', placeholder: 'Total Credit Accounts' },
             { name: 'dti', placeholder: 'Debt to Income Ratio' },
-            { name: 'credit_history', placeholder: 'Length of Credit History in years' },
+            { name: 'credit_history', placeholder: 'Credit History Length (years)' },
             { name: 'bankruptcies', placeholder: 'Bankruptcies' },
           ].map((field) => (
             <div key={field.name} className="flex flex-col">
@@ -258,10 +252,10 @@ const Home = () => {
                 value={formData[field.name]}
                 onChange={handleChange}
                 placeholder={field.placeholder}
-                className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border rounded-lg"
               />
               {errors[field.name] && (
-                <span className="text-red-500 text-sm mt-1">{errors[field.name]}</span>
+                <span className="text-red-500 text-sm">{errors[field.name]}</span>
               )}
             </div>
           ))}
