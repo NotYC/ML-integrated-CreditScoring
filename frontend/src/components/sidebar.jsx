@@ -193,7 +193,7 @@ const Sidebar = ({ toggleSidebar }) => {
         <div className={`flex flex-col items-center space-y-2 ${isExpanded ? "px-6" : "px-4"}`}>
           <SidebarLink to="/Home" text="Home" icon={home} active={isActive("/Home")} expanded={isExpanded} />
           <SidebarLink to="/mybank" text="My Banks" icon={bank} active={isActive("/mybank")} expanded={isExpanded} />
-          <SidebarLink to="/credit-history" text="Credit History" icon={history} active={isActive("/credit-history")} expanded={isExpanded} />
+          <SidebarLink to="/credit-history" text="Credit Score History" icon={history} active={isActive("/credit-history")} expanded={isExpanded} />
           <SidebarLink to="/about-us" text="About Us" icon={aboutus} active={isActive("/about-us")} expanded={isExpanded} />
           <SidebarLink to="/help" text="Help" icon={help} active={isActive("/help")} expanded={isExpanded} />
           <Link to="/SignIn" className="w-full" onClick={handleLogout}>
