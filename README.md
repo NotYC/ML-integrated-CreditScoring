@@ -138,8 +138,7 @@ A well-structured, multi-section form that collects detailed:
 
 ### 🤖 Machine Learning-Based Credit Scoring
 Integrated ML models to predict creditworthiness:
-- **Linear Regression** – Interpretable model with a transparent scoring formula.
-- **XGBoost** – High-performance ensemble model for superior accuracy.
+- **Random Forest regresser** – To handle non linear relationships and generate credit scores accordingly
 
 ### 📊 Real-Time Credit Score Visualization
 - **Interactive gauge meter** to display predicted credit score.
@@ -197,8 +196,8 @@ Integrated ML models to predict creditworthiness:
 
 | **Technology** | **Description** |
 |----------------|-----------------|
-| [![XGBoost](https://img.shields.io/badge/XGBoost-BE0029?style=for-the-badge&logo=python&logoColor=white)](https://xgboost.ai) | A scalable machine learning algorithm used for gradient boosting. |
-| [![Linear Regression](https://img.shields.io/badge/Linear%20Regression-00599C?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/stable/modules/linear_model.html#linear-regression) | A basic algorithm used to predict the credit score. |
+| [![Random Forest](https://img.shields.io/badge/Random%20Forest-0C3C7C?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) | Random Forest Regresser is a powerful ensemble algorithm that builds multiple decision trees and merges their results for accurate predictions. |
+
 
 <br />
 

@@ -50,7 +50,7 @@ const AboutUs = () => {
         
         <div className="bg-white shadow-md rounded-lg p-5">
           <p className="text-gray-700 mb-4">
-            The Automating Credit Scoring System is an intelligent, end-to-end solution that leverages machine learning to evaluate an individual’s creditworthiness based on financial transactions, income patterns, employment history, and alternative data sources. It automates the entire pipeline—from data collection and preprocessing to model training, validation, and deployment—ensuring accurate and efficient credit assessments. Designed with transparency in mind, the system delivers interpretable credit scores that not only foster user trust but also align with regulatory compliance standards, making it a reliable and future-ready tool for modern financial ecosystems.
+            KYCS - The Automating Credit Scoring System is an intelligent, end-to-end solution that leverages machine learning to evaluate an individual’s creditworthiness based on financial transactions, income patterns, employment history, and alternative data sources. It automates the entire pipeline—from data collection and preprocessing to model training, validation, and deployment—ensuring accurate and efficient credit assessments. Designed with transparency in mind, the system delivers interpretable credit scores that not only foster user trust but also align with regulatory compliance standards, making it a reliable and future-ready tool for modern financial ecosystems.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
