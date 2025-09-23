@@ -295,6 +295,8 @@ Reverting to Pre-Docker Setup: If you need to revert to the state before Docker 
 
 Docker Installation: Ensure Docker is installed and running on your system. You can download it from <a href="https://www.docker.com/get-started" target="_blank">Docker's official website</a>.
 
+P1 of the project included integration of credit scoring chart and unique user credit card.
+
 
 
 
